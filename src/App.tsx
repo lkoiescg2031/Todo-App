@@ -1,7 +1,7 @@
 import React from "react";
 
 import AppLayout from "./layout/Applayout";
-import KanBanColumns from "./components/KanBanColumns";
+import KanBanColumns from "./components/KanBanColumn";
 import KanBanCard from "./components/KanBanCard";
 import KanBanBoard from "./components/KanBanBoard";
 
