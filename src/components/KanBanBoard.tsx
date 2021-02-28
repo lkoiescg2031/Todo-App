@@ -31,12 +31,14 @@ const useKanBanBoardStyles = makeStyles((theme) => ({
 
 export default function KanBanBoard({ children }: KanBanBoardProps) {
 	const classes = useKanBanBoardStyles();
+	const appendText =
+		typeof children === "undefined" ? "Add list" : "Add another list";
 	return (
 		<div className={classes.boardWrapper}>
 			<div className={classes.board}>
 				{children}
 				<Button classes={{ root: classes.addButton }} startIcon={<AddIcon />}>
-					Add another list
+					{appendText}
 				</Button>
 			</div>
 		</div>

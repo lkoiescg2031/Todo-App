@@ -29,8 +29,8 @@ export const Width = "260px";
 class KanBanColumns extends PureComponent<KanBanColumnsProps> {
 	render() {
 		const { name, classes, children } = this.props;
-		const appendCardText = "Add another Card";
-		//	children.length > 0 ? "Add another card" : "Add a card";
+		const appendCardText =
+			typeof children === "undefined" ? "Add a card" : "Add another card";
 
 		return (
 			<Card elevation={2} classes={{ root: classes.columns }}>
