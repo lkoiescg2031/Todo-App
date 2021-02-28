@@ -45,9 +45,7 @@ function App() {
 				<KanBanColumns name="In Progress">
 					<KanBanCard title="Task 1" />
 				</KanBanColumns>
-				<KanBanColumns name="In Progress">
-					<KanBanCard title="Task 1" />
-				</KanBanColumns>
+				<KanBanColumns name="In Progress"></KanBanColumns>
 			</KanBanBoard>
 		</AppLayout>
 	);
