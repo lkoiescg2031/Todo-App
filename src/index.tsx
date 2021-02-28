@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import configureStore from "./redux/configureStore";
 
-import "fontsource-roboto";
+import "@fontsource/roboto";
 
 import "./index.css";
 
