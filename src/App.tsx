@@ -11,6 +11,8 @@ import KanBanColumns from "./components/KanBanColumns";
 import KanBanCard from "./components/KanBanCard";
 import KanBanBoard from "./components/KanBanBoard";
 
+import teal from "@material-ui/core/colors/teal";
+
 const useAppStyles = makeStyles((theme) =>
 	createStyles({
 		mainWrapper: {
@@ -19,7 +21,9 @@ const useAppStyles = makeStyles((theme) =>
 			flexDirection: "column",
 		},
 		main: {
+			width: "max-content",
 			flexGrow: 1,
+			backgroundColor: teal[100],
 		},
 	})
 );
