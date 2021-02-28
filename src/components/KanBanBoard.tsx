@@ -10,7 +10,12 @@ interface KanBanBoardProps {
 }
 
 const useKanBanBoardStyles = makeStyles((theme) => ({
-	root: {
+	boardWrapper: {
+		width: "100%",
+		height: "100%",
+		overflow: "auto",
+	},
+	board: {
 		width: "max-content",
 		display: "flex",
 		padding: `${theme.spacing(2)}px ${theme.spacing(1)}px`,
@@ -20,17 +25,20 @@ const useKanBanBoardStyles = makeStyles((theme) => ({
 		height: "max-content",
 		margin: `0px ${theme.spacing(1)}px`,
 		textTransform: "none",
+		backgroundColor: "rgba(255,255,255, 0.2)",
 	},
 }));
 
 export default function KanBanBoard({ children }: KanBanBoardProps) {
 	const classes = useKanBanBoardStyles();
 	return (
-		<div className={classes.root}>
-			{children}
-			<Button classes={{ root: classes.addButton }} startIcon={<AddIcon />}>
-				Add another list
-			</Button>
+		<div className={classes.boardWrapper}>
+			<div className={classes.board}>
+				{children}
+				<Button classes={{ root: classes.addButton }} startIcon={<AddIcon />}>
+					Add another list
+				</Button>
+			</div>
 		</div>
 	);
 }
