@@ -6,7 +6,7 @@ import AddIcon from "@material-ui/icons/Add";
 import { Width } from "./KanBanColumn";
 
 interface KanBanBoardProps {
-	children: React.ReactNode;
+	children?: React.ReactNode;
 }
 
 const useKanBanBoardStyles = makeStyles((theme) => ({

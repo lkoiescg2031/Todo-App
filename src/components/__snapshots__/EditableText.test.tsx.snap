@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EditableText /> snapshot test in input mode 1`] = `
+<div>
+  <div
+    class="MuiFormControl-root MuiTextField-root"
+  >
+    <div
+      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiInput-input"
+        type="text"
+        value="input mode"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<EditableText /> snapshot test in text mode 1`] = `
+<div>
+  <span
+    class="EditableText-spanText-1"
+  >
+    text mode
+  </span>
+</div>
+`;

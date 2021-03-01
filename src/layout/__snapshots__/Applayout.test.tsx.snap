@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AppLayout /> matchShapshot test 1`] = `
+<div>
+  <header
+    class="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary mui-fixed MuiPaper-elevation4"
+  >
+    <div
+      class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+    >
+      <h4
+        class="MuiTypography-root MuiTypography-h4"
+      >
+        test
+      </h4>
+    </div>
+  </header>
+  <div
+    class="makeStyles-mainWrapper-1"
+  >
+    <div
+      class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
+    />
+    <main
+      class="makeStyles-main-2"
+    />
+  </div>
+</div>
+`;

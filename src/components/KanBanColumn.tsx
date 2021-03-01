@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { MouseEvent, PureComponent } from "react";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -16,7 +16,9 @@ import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 
 import grey from "@material-ui/core/colors/grey";
 
-interface KanBanColumnsProps {
+import EditableText from "./EditableText";
+
+interface KanBanColumnProp {
 	name: string;
 	classes: {
 		columns: string;
@@ -24,18 +26,40 @@ interface KanBanColumnsProps {
 		addButton: string;
 	};
 }
+
+interface KanBanColumnState {
+	isTitleEdit: boolean;
+}
+
 export const Width = "260px";
 
-class KanBanColumns extends PureComponent<KanBanColumnsProps> {
+class KanBanColumns extends PureComponent<KanBanColumnProp, KanBanColumnState> {
+	constructor(props: KanBanColumnProp) {
+		super(props);
+
+		this.state = {
+			isTitleEdit: false,
+		};
+		this.onColumnNameClicked = this.onColumnNameClicked.bind(this);
+	}
+
+	onColumnNameClicked(e: MouseEvent) {
+		this.setState((prevState) => ({
+			...prevState,
+			isTitleEdit: !prevState.isTitleEdit,
+		}));
+	}
+
 	render() {
-		const { name, classes, children } = this.props;
+		const { classes, children, name } = this.props;
+		// const { isTitleEdit } = this.state;
 		const appendCardText =
 			typeof children === "undefined" ? "Add a card" : "Add another card";
 
 		return (
 			<Card elevation={2} classes={{ root: classes.columns }}>
 				<CardHeader
-					title={name}
+					title={<EditableText value={name} initialMode="text" />}
 					action={
 						<IconButton>
 							<MoreVertIcon />

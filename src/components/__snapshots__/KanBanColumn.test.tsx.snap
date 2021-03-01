@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<KanBanColumn /> snapshot test 1`] = `
+<div>
+  <div
+    class="MuiPaper-root MuiCard-root KanBanColumns-columns-1 MuiPaper-elevation2 MuiPaper-rounded"
+  >
+    <div
+      class="MuiCardHeader-root"
+    >
+      <div
+        class="MuiCardHeader-content"
+      >
+        <span
+          class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
+        >
+          <span
+            class="EditableText-spanText-4"
+          >
+            TODO
+          </span>
+        </span>
+      </div>
+      <div
+        class="MuiCardHeader-action"
+      >
+        <button
+          class="MuiButtonBase-root MuiIconButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <span
+            class="MuiIconButton-label"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="KanBanColumns-works-2"
+    >
+      <div
+        class="MuiPaper-root MuiCard-root KanBanCard-root-5 MuiPaper-elevation1 MuiPaper-rounded"
+      >
+        <button
+          class="MuiButtonBase-root MuiCardActionArea-root KanBanCard-actionArea-6"
+          tabindex="0"
+          type="button"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1"
+          >
+            Work 1
+          </p>
+          <span
+            class="MuiCardActionArea-focusHighlight"
+          />
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        class="MuiPaper-root MuiCard-root KanBanCard-root-5 MuiPaper-elevation1 MuiPaper-rounded"
+      >
+        <button
+          class="MuiButtonBase-root MuiCardActionArea-root KanBanCard-actionArea-6"
+          tabindex="0"
+          type="button"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1"
+          >
+            Work 2
+          </p>
+          <span
+            class="MuiCardActionArea-focusHighlight"
+          />
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <div
+        class="MuiPaper-root MuiCard-root KanBanCard-root-5 MuiPaper-elevation1 MuiPaper-rounded"
+      >
+        <button
+          class="MuiButtonBase-root MuiCardActionArea-root KanBanCard-actionArea-6"
+          tabindex="0"
+          type="button"
+        >
+          <p
+            class="MuiTypography-root MuiTypography-body1"
+          >
+            Work 3
+          </p>
+          <span
+            class="MuiCardActionArea-focusHighlight"
+          />
+          <span
+            class="MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      class="MuiCardActions-root MuiCardActions-spacing"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root KanBanColumns-addButton-3 MuiButton-text MuiButton-fullWidth"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label"
+        >
+          <span
+            class="MuiButton-startIcon MuiButton-iconSizeMedium"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+              />
+            </svg>
+          </span>
+          <p
+            class="MuiTypography-root MuiTypography-body1"
+          >
+            Add another card
+          </p>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+      <button
+        class="MuiButtonBase-root MuiIconButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6z"
+            />
+            <path
+              d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 10l-2.5-1.5L15 12V4h5v8z"
+            />
+          </svg>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;

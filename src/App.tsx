@@ -15,37 +15,12 @@ function App() {
 					<KanBanCard title="Task 3" />
 					<KanBanCard title="Task 4" />
 				</KanBanColumns>
-				<KanBanColumns name="In Progress">
-					<KanBanCard title="Task 1" />
-					<KanBanCard title="Task 2" />
-					<KanBanCard title="Task 3" />
-					<KanBanCard title="Task 4" />
-					<KanBanCard title="Task 2" />
-					<KanBanCard title="Task 3" />
-					<KanBanCard title="Task 4" />
-				</KanBanColumns>
-				<KanBanColumns name="In Progress">
-					<KanBanCard title="Task 1" />
-				</KanBanColumns>
-				<KanBanColumns name="In Progress">
-					<KanBanCard title="Task 1" />
-				</KanBanColumns>
-				<KanBanColumns name="In Progress">
-					<KanBanCard title="Task 1" />
-				</KanBanColumns>
-				<KanBanColumns name="In Progress">
+				<KanBanColumns name="To Do">
 					<KanBanCard title="Task 1" />
 					<KanBanCard title="Task 2" />
 					<KanBanCard title="Task 3" />
 					<KanBanCard title="Task 4" />
 				</KanBanColumns>
-				<KanBanColumns name="In Progress">
-					<KanBanCard title="Task 1" />
-				</KanBanColumns>
-				<KanBanColumns name="In Progress">
-					<KanBanCard title="Task 1" />
-				</KanBanColumns>
-				<KanBanColumns name="In Progress"></KanBanColumns>
 			</KanBanBoard>
 		</AppLayout>
 	);

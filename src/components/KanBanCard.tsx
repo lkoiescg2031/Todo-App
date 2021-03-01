@@ -44,9 +44,7 @@ class KanBanCard extends PureComponent<KanBanCardProps, KanBanCardState> {
 		}
 	}
 
-	onEditClicked(e: React.MouseEvent) {
-		// TODO Edit 다이얼 로그 생성
-	}
+	onEditClicked(e: React.MouseEvent) {}
 
 	onCardHover(isHover = false) {
 		return (e: React.MouseEvent) => {
