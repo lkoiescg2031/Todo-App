@@ -46,13 +46,17 @@ class AppLayout extends PureComponent<AppLayoutProps, AppLayoutState> {
 			<Context.Provider value={{ subtitle, setSubtitle: this.setSubtitle }}>
 				<AppBar>
 					<ToolBar>
-						<Typography variant="h4" classes={{ root: classes.title }}>
-							<Hidden xsDown implementation="js">
+						<Typography
+							role="heading"
+							variant="h4"
+							classes={{ root: classes.title }}
+						>
+							<Hidden xsDown implementation="css">
 								{typeof subtitle === "undefined"
 									? title
 									: `${title} | ${subtitle}`}
 							</Hidden>
-							<Hidden smUp implementation="js">
+							<Hidden smUp implementation="css">
 								{typeof subtitle === "undefined" ? title : subtitle}
 							</Hidden>
 						</Typography>

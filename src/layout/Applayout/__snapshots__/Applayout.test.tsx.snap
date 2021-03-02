@@ -10,7 +10,19 @@ exports[`<AppLayout /> matchShapshot test 1`] = `
     >
       <h4
         class="MuiTypography-root AppLayout-title-3 MuiTypography-h4"
-      />
+        role="heading"
+      >
+        <div
+          class="PrivateHiddenCss-xsDown-6"
+        >
+          test
+        </div>
+        <div
+          class="PrivateHiddenCss-smUp-8"
+        >
+          test
+        </div>
+      </h4>
     </div>
   </header>
   <div
