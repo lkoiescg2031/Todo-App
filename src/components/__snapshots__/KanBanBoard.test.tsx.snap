@@ -9,7 +9,7 @@ exports[`<KanBanBoard /> snapshot test 1`] = `
       class="makeStyles-board-2"
     >
       <div
-        class="MuiPaper-root MuiCard-root KanBanColumns-columns-4 MuiPaper-elevation2 MuiPaper-rounded"
+        class="MuiPaper-root MuiCard-root KanBanColumns-columns-3 MuiPaper-elevation2 MuiPaper-rounded"
       >
         <div
           class="MuiCardHeader-root"
@@ -21,7 +21,7 @@ exports[`<KanBanBoard /> snapshot test 1`] = `
               class="MuiTypography-root MuiCardHeader-title MuiTypography-h5 MuiTypography-displayBlock"
             >
               <span
-                class="EditableText-spanText-7"
+                class="EditableText-spanText-6"
               >
                 Done
               </span>
@@ -56,13 +56,13 @@ exports[`<KanBanBoard /> snapshot test 1`] = `
           </div>
         </div>
         <div
-          class="KanBanColumns-works-5"
+          class="KanBanColumns-works-4"
         />
         <div
           class="MuiCardActions-root MuiCardActions-spacing"
         >
           <button
-            class="MuiButtonBase-root MuiButton-root KanBanColumns-addButton-6 MuiButton-text MuiButton-fullWidth"
+            class="MuiButtonBase-root MuiButton-root KanBanColumns-addButton-5 MuiButton-text MuiButton-fullWidth"
             tabindex="0"
             type="button"
           >
@@ -93,62 +93,130 @@ exports[`<KanBanBoard /> snapshot test 1`] = `
               class="MuiTouchRipple-root"
             />
           </button>
-          <button
-            class="MuiButtonBase-root MuiIconButton-root"
-            tabindex="0"
-            type="button"
-          >
-            <span
-              class="MuiIconButton-label"
-            >
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6z"
-                />
-                <path
-                  d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 10l-2.5-1.5L15 12V4h5v8z"
-                />
-              </svg>
-            </span>
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </button>
         </div>
       </div>
-      <button
-        class="MuiButtonBase-root MuiButton-root makeStyles-addButton-3 MuiButton-text"
-        tabindex="0"
-        type="button"
+      <div
+        class="AddColumn-wrapper-7"
       >
-        <span
-          class="MuiButton-label"
+        <div
+          class="MuiPaper-root MuiAccordion-root AddColumn-accordianRoot-8 MuiAccordion-rounded MuiPaper-elevation0 MuiPaper-rounded"
         >
-          <span
-            class="MuiButton-startIcon MuiButton-iconSizeMedium"
+          <div
+            aria-disabled="false"
+            aria-expanded="false"
+            class="MuiButtonBase-root MuiAccordionSummary-root AddColumn-summaryRoot-10"
+            role="button"
+            tabindex="0"
           >
-            <svg
-              aria-hidden="true"
-              class="MuiSvgIcon-root"
-              focusable="false"
-              viewBox="0 0 24 24"
+            <div
+              class="MuiAccordionSummary-content"
             >
-              <path
-                d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
-              />
-            </svg>
-          </span>
-          Add another list
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
-      </button>
+              <div
+                class="AddColumn-addTextWrapper-11"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="MuiSvgIcon-root"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+                  />
+                </svg>
+                Add another list
+              </div>
+              <div
+                class="MuiFormControl-root MuiTextField-root AddColumn-inputRoot-12 AddColumn-hidden-13"
+              >
+                <div
+                  class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+                >
+                  <input
+                    aria-invalid="false"
+                    class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                    placeholder="Enter list title..."
+                    type="text"
+                    value=""
+                  />
+                  <fieldset
+                    aria-hidden="true"
+                    class="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
+                    style="padding-left: 8px;"
+                  >
+                    <legend
+                      class="PrivateNotchedOutline-legend-15"
+                      style="width: 0.01px;"
+                    >
+                      <span>
+                        ​
+                      </span>
+                    </legend>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="MuiCollapse-container MuiCollapse-hidden"
+            style="min-height: 0px;"
+          >
+            <div
+              class="MuiCollapse-wrapper"
+            >
+              <div
+                class="MuiCollapse-wrapperInner"
+              >
+                <div
+                  role="region"
+                >
+                  <div
+                    class="MuiAccordionActions-root MuiAccordionActions-spacing"
+                  >
+                    <button
+                      class="MuiButtonBase-root MuiIconButton-root"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span
+                        class="MuiIconButton-label"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="MuiSvgIcon-root"
+                          focusable="false"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                    <button
+                      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+                      tabindex="0"
+                      type="button"
+                    >
+                      <span
+                        class="MuiButton-label"
+                      >
+                        Add
+                      </span>
+                      <span
+                        class="MuiTouchRipple-root"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

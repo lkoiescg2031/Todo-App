@@ -1,4 +1,4 @@
-import React, { MouseEvent, KeyboardEvent, PureComponent } from "react";
+import React, { KeyboardEvent, PureComponent } from "react";
 
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";

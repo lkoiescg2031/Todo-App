@@ -151,32 +151,6 @@ exports[`<KanBanColumn /> snapshot test 1`] = `
           class="MuiTouchRipple-root"
         />
       </button>
-      <button
-        class="MuiButtonBase-root MuiIconButton-root"
-        tabindex="0"
-        type="button"
-      >
-        <span
-          class="MuiIconButton-label"
-        >
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6z"
-            />
-            <path
-              d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 10l-2.5-1.5L15 12V4h5v8z"
-            />
-          </svg>
-        </span>
-        <span
-          class="MuiTouchRipple-root"
-        />
-      </button>
     </div>
   </div>
 </div>

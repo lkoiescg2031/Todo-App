@@ -12,7 +12,6 @@ import Typography from "@material-ui/core/Typography";
 
 import AddIcon from "@material-ui/icons/Add";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import CollectionsBookmarkIcon from "@material-ui/icons/CollectionsBookmark";
 
 import grey from "@material-ui/core/colors/grey";
 
@@ -52,7 +51,6 @@ class KanBanColumns extends PureComponent<KanBanColumnProp, KanBanColumnState> {
 
 	render() {
 		const { classes, children, name } = this.props;
-		// const { isTitleEdit } = this.state;
 		const appendCardText =
 			typeof children === "undefined" ? "Add a card" : "Add another card";
 
@@ -75,9 +73,6 @@ class KanBanColumns extends PureComponent<KanBanColumnProp, KanBanColumnState> {
 					>
 						<Typography variant="body1">{appendCardText}</Typography>
 					</Button>
-					<IconButton size="medium">
-						<CollectionsBookmarkIcon fontSize="small" />
-					</IconButton>
 				</CardActions>
 			</Card>
 		);
