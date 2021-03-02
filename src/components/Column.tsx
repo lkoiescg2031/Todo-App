@@ -39,6 +39,7 @@ class Column extends PureComponent<ColumnProps> {
 		requestUpdateColumn: () => {},
 		requestCardItems: () => {},
 	};
+
 	constructor(props: ColumnProps) {
 		super(props);
 
