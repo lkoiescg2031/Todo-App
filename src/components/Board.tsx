@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import Skeleton from "@material-ui/lab/Skeleton";
 
-import AppLayout from "../layout/Applayout";
+import AppLayoutContext from "../layout/Applayout/Context";
 
 import KanBanBoard from "./KanBanBoard";
 import Column from "../container/Column";
@@ -36,6 +36,8 @@ class Board extends PureComponent<BoardProps> {
 		isFetch: false,
 	};
 
+	static contextType = AppLayoutContext;
+
 	componentDidMount() {
 		const {
 			itemId,
@@ -48,11 +50,20 @@ class Board extends PureComponent<BoardProps> {
 		if (typeof data === "undefined" && isFetch === false) {
 			requestBoardItem(itemId);
 		}
+
 		requestColumnItems({ boardId: itemId });
 	}
 
+	componentDidUpdate() {
+		const { subtitle, setSubtitle } = this.context;
+
+		if (this.props.data?.name !== subtitle) {
+			setSubtitle(this.props.data?.name);
+		}
+	}
+
 	render() {
-		const { classes, isFetch, data, columns } = this.props;
+		const { classes, isFetch, columns } = this.props;
 
 		if (isFetch) {
 			return (
@@ -66,18 +77,11 @@ class Board extends PureComponent<BoardProps> {
 			);
 		} else {
 			return (
-				<AppLayout.Consumer>
-					{({ setSubTitle }) => {
-						setSubTitle(data?.name ?? "");
-						return (
-							<KanBanBoard>
-								{columns.map((column, key) => (
-									<Column key={`columnId-${key}`} itemId={column.id} />
-								))}
-							</KanBanBoard>
-						);
-					}}
-				</AppLayout.Consumer>
+				<KanBanBoard>
+					{columns.map((column, key) => (
+						<Column key={`columnId-${key}`} itemId={column.id} />
+					))}
+				</KanBanBoard>
 			);
 		}
 	}
