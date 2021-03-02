@@ -1,7 +1,7 @@
 import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
-import AddColumn from "./AddColumn";
+import AddColumn from "./AddColumnButton";
 
 interface KanBanBoardProps {
 	onAddColumn: (title: string) => void;
