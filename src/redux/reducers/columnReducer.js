@@ -1,15 +1,17 @@
 import { handle } from "redux-pack";
 
-import { FETCH, FETCH_LIST } from "../actions/columnAction";
+import { CREATE, FETCH, FETCH_LIST } from "../actions/columnAction";
 
 const initialState = {
 	ids: [],
 	entities: {},
 	loadingState: {
 		[FETCH_LIST]: false,
+		[CREATE]: false,
 	},
 	errorState: {
 		[FETCH_LIST]: false,
+		[CREATE]: false,
 	},
 };
 
@@ -18,6 +20,7 @@ const boardReducers = (state = initialState, action) => {
 	// const { resourceName, key } = meta || {};
 
 	switch (type) {
+		case CREATE:
 		case FETCH:
 		case FETCH_LIST:
 			return handle(state, action, {
@@ -69,7 +72,7 @@ const boardReducers = (state = initialState, action) => {
 
 							return {
 								ids,
-								entities: { ...prevState, [id]: data },
+								entities: { ...prevState.entities, [id]: data },
 							};
 						}
 					})(payload);

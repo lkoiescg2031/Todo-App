@@ -12,7 +12,10 @@ import {
 } from "../redux/selectors/columnSelector";
 
 import { fetch as requestBoardItem } from "../redux/actions/boardAction";
-import { fetchList as requestColumnItems } from "../redux/actions/columnAction";
+import {
+	fetchList as requestColumnItems,
+	createItem as requestCreateColumn,
+} from "../redux/actions/columnAction";
 
 const mapStateToProps = (state: {}, props: { itemId: number }) => {
 	const { itemId } = props;
@@ -29,6 +32,7 @@ const mapStateToProps = (state: {}, props: { itemId: number }) => {
 const mapDispatchToProps = {
 	requestBoardItem,
 	requestColumnItems,
+	requestCreateColumn,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);

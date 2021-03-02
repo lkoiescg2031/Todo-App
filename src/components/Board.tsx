@@ -26,6 +26,7 @@ export interface BoardProps {
 	columns: ColumnItem[];
 	requestBoardItem: (id: number, params?: {}, meta?: {}) => void;
 	requestColumnItems: (params?: {}, meta?: {}) => void;
+	requestCreateColumn: (params?: {}, meta?: {}) => void;
 	classes: {
 		skeleton: string;
 	};
@@ -34,9 +35,31 @@ export interface BoardProps {
 class Board extends PureComponent<BoardProps> {
 	static defaultProps = {
 		isFetch: false,
+		requestBoardItem: () => {},
+		requestColumnItems: () => {},
+		requestCreateColumn: () => {},
 	};
 
 	static contextType = AppLayoutContext;
+
+	constructor(props: BoardProps) {
+		super(props);
+
+		this.state = {};
+		this.handleAddColumn = this.handleAddColumn.bind(this);
+	}
+
+	handleAddColumn(name: string) {
+		const { requestCreateColumn, requestColumnItems, itemId } = this.props;
+		requestCreateColumn(
+			{ name, boardId: itemId },
+			{
+				onSuccess: () => {
+					requestColumnItems({ boardId: itemId });
+				},
+			}
+		);
+	}
 
 	componentDidMount() {
 		const {
@@ -77,7 +100,7 @@ class Board extends PureComponent<BoardProps> {
 			);
 		} else {
 			return (
-				<KanBanBoard>
+				<KanBanBoard onAddColumn={this.handleAddColumn}>
 					{columns.map((column, key) => (
 						<Column key={`columnId-${key}`} itemId={column.id} />
 					))}
