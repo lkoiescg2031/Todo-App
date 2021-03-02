@@ -36,11 +36,19 @@ class EditableText extends PureComponent<EditableTextProps, EditableTextState> {
 			prevValue: props.value || "",
 		};
 
+		this.onMouseDown = this.onMouseDown.bind(this);
 		this.onHover = this.onHover.bind(this);
 		this.setEditMode = this.setEditMode.bind(this);
 		this.setTextMode = this.setTextMode.bind(this);
 		this.checkEndOfEditMode = this.checkEndOfEditMode.bind(this);
 		this.checkEndOfEditByKeyboard = this.checkEndOfEditByKeyboard.bind(this);
+	}
+
+	onMouseDown() {
+		const { isEditHover } = this.state;
+		if (isEditHover) {
+			this.setState((prevState) => ({ isEditDragged: true }));
+		}
 	}
 
 	onHover(value?: boolean) {
@@ -107,25 +115,22 @@ class EditableText extends PureComponent<EditableTextProps, EditableTextState> {
 
 	render() {
 		const { classes } = this.props;
-		const { isEdit, value } = this.state;
+		const { isEdit, value, prevValue } = this.state;
 
 		return (
 			<>
 				{isEdit && (
 					<TextField
+						color="primary"
+						variant="outlined"
+						size="small"
+						autoFocus
 						value={value}
+						placeholder={prevValue}
 						onMouseEnter={this.onHover(true)}
 						onMouseLeave={this.onHover(false)}
-						onMouseDown={(e: MouseEvent) => {
-							const { isEditHover } = this.state;
-							if (isEditHover) {
-								this.setState((prevState) => ({ isEditDragged: true }));
-							}
-						}}
-						inputProps={{
-							onKeyDown: this.checkEndOfEditByKeyboard,
-						}}
-						// onKeyDown={this.checkEndOfEditByKeyboard}
+						onMouseDown={this.onMouseDown}
+						inputProps={{ onKeyDown: this.checkEndOfEditByKeyboard }}
 						onChange={({ target }) => {
 							const newValue = target.value;
 							this.setState((prevState) => ({ ...prevState, value: newValue }));

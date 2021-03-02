@@ -6,14 +6,29 @@ exports[`<EditableText /> snapshot test in input mode 1`] = `
     class="MuiFormControl-root MuiTextField-root"
   >
     <div
-      class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+      class="MuiInputBase-root MuiOutlinedInput-root Mui-focused Mui-focused MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
     >
       <input
         aria-invalid="false"
-        class="MuiInputBase-input MuiInput-input"
+        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+        placeholder="input mode"
         type="text"
         value="input mode"
       />
+      <fieldset
+        aria-hidden="true"
+        class="PrivateNotchedOutline-root-3 MuiOutlinedInput-notchedOutline"
+        style="padding-left: 8px;"
+      >
+        <legend
+          class="PrivateNotchedOutline-legend-4"
+          style="width: 0.01px;"
+        >
+          <span>
+            ​
+          </span>
+        </legend>
+      </fieldset>
     </div>
   </div>
 </div>
