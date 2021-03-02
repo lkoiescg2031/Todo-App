@@ -50,15 +50,8 @@ class Board extends PureComponent<BoardProps> {
 	}
 
 	handleAddColumn(name: string) {
-		const { requestCreateColumn, requestColumnItems, itemId } = this.props;
-		requestCreateColumn(
-			{ name, boardId: itemId },
-			{
-				onSuccess: () => {
-					requestColumnItems({ boardId: itemId });
-				},
-			}
-		);
+		const { requestCreateColumn, itemId } = this.props;
+		requestCreateColumn({ name, boardId: itemId });
 	}
 
 	componentDidMount() {
