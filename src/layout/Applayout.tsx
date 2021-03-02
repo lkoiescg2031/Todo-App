@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, createContext } from "react";
 
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
@@ -32,22 +32,33 @@ interface AppLayoutProps {
 	children?: React.ReactNode;
 }
 
+const { Provider, Consumer } = createContext({
+	setSubTitle: (str: string) => {},
+});
+
 function AppLayout({ title, children }: AppLayoutProps) {
 	const classes = useAppStyles();
-
+	const [subTitle, setSubTitle] = useState("");
+	const subTitleSetter = (subTitle: string) => {
+		setSubTitle(subTitle);
+	};
 	return (
-		<>
+		<Provider value={{ setSubTitle: subTitleSetter }}>
 			<AppBar>
 				<ToolBar>
-					<Typography variant="h4">{title}</Typography>
+					<Typography variant="h4">
+						{subTitle.length > 0 ? subTitle : title}
+					</Typography>
 				</ToolBar>
 			</AppBar>
 			<div className={classes.mainWrapper}>
 				<ToolBar />
 				<main className={classes.main}>{children}</main>
 			</div>
-		</>
+		</Provider>
 	);
 }
+
+AppLayout.Consumer = Consumer;
 
 export default AppLayout;
