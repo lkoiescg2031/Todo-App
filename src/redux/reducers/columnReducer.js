@@ -1,6 +1,6 @@
 import { handle } from "redux-pack";
 
-import { CREATE, FETCH, FETCH_LIST } from "../actions/columnAction";
+import { CREATE, UPDATE, FETCH, FETCH_LIST } from "../actions/columnAction";
 
 const initialState = {
 	ids: [],
@@ -21,6 +21,7 @@ const boardReducers = (state = initialState, action) => {
 
 	switch (type) {
 		case CREATE:
+		case UPDATE:
 		case FETCH:
 		case FETCH_LIST:
 			return handle(state, action, {

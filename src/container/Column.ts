@@ -11,7 +11,10 @@ import {
 	fetchListLoadingStateSelector as isCardsFetchState,
 } from "../redux/selectors/cardSelector";
 
-import { fetch as requestColumnItem } from "../redux/actions/columnAction";
+import {
+	fetch as requestColumnItem,
+	updateItem as requestUpdateColumn,
+} from "../redux/actions/columnAction";
 import { fetchList as requestCardItems } from "../redux/actions/cardAction";
 
 const mapStateToProps = (state: {}, props: { itemId: number }) => {
@@ -25,6 +28,10 @@ const mapStateToProps = (state: {}, props: { itemId: number }) => {
 	};
 };
 
-const mapDispatchToProps = { requestColumnItem, requestCardItems };
+const mapDispatchToProps = {
+	requestColumnItem,
+	requestCardItems,
+	requestUpdateColumn,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Column);

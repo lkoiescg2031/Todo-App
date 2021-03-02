@@ -19,24 +19,37 @@ interface CardItem {
 	boardId: number;
 }
 
-interface ColumProps {
+interface ColumnProps {
 	itemId: number;
 	data?: ColumnItem;
 	isFetch: boolean;
 	cards?: CardItem[];
 	requestColumnItem: (id: number, params?: {}, meta?: {}) => void;
+	requestUpdateColumn: (id: number, params?: {}, meta?: {}) => void;
 	requestCardItems: (params?: {}, meta?: {}) => void;
 	classes: {
 		skeleton: string;
 	};
 }
 
-class Column extends PureComponent<ColumProps> {
+class Column extends PureComponent<ColumnProps> {
 	static defaultProps = {
 		isFetch: false,
 		requestColumnItem: () => {},
+		requestUpdateColumn: () => {},
 		requestCardItems: () => {},
 	};
+	constructor(props: ColumnProps) {
+		super(props);
+
+		this.state = {};
+		this.handleTitleChange = this.handleTitleChange.bind(this);
+	}
+
+	handleTitleChange(newValue: string, prevValue: string) {
+		const { itemId, data, requestUpdateColumn } = this.props;
+		requestUpdateColumn(itemId, { ...data, name: newValue });
+	}
 
 	componentDidMount() {
 		const { itemId, data, isFetch } = this.props;
@@ -54,7 +67,7 @@ class Column extends PureComponent<ColumProps> {
 
 		if (isFetch) {
 			return (
-				<KanBanColumn name={name ?? ""}>
+				<KanBanColumn name={name ?? ""} onTitleChanged={this.handleTitleChange}>
 					<div className={classes.skeleton}>
 						<Skeleton variant="rect" animation="wave" height={40} />
 						<Skeleton variant="rect" animation="wave" height={40} />
@@ -65,7 +78,7 @@ class Column extends PureComponent<ColumProps> {
 			);
 		} else {
 			return (
-				<KanBanColumn name={name ?? ""}>
+				<KanBanColumn name={name ?? ""} onTitleChanged={this.handleTitleChange}>
 					{cards?.map(({ name }, idx) => (
 						<KanBanCard key={`card-${itemId}-${idx}`} title={name} />
 					))}
