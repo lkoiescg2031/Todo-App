@@ -2,22 +2,21 @@ import React, { PureComponent } from "react";
 
 import { withStyles } from "@material-ui/core/styles";
 
+import Skeleton from "@material-ui/lab/Skeleton";
+
 import AppLayout from "../layout/Applayout";
 
 import KanBanBoard from "./KanBanBoard";
-import KanBanColumn, { Width } from "./KanBanColumn";
-import Skeleton from "@material-ui/lab/Skeleton";
+import Column from "../container/Column";
+
+//add defs
+import { ColumnItem } from "./Column";
+import { Width } from "./KanBanColumn";
 
 interface BoardItem {
 	id: number;
 	name: string;
 	desc: string;
-}
-
-interface ColumnItem {
-	id: number;
-	name: string;
-	boardId: number;
 }
 
 export interface BoardProps {
@@ -26,6 +25,7 @@ export interface BoardProps {
 	isFetch: boolean;
 	columns: ColumnItem[];
 	requestBoardItem: (id: number, params?: {}, meta?: {}) => void;
+	requestColumnItems: (params?: {}, meta?: {}) => void;
 	classes: {
 		skeleton: string;
 	};
@@ -36,18 +36,19 @@ class Board extends PureComponent<BoardProps> {
 		isFetch: false,
 	};
 
-	constructor(props: BoardProps) {
-		super(props);
-
-		this.state = {};
-	}
-
 	componentDidMount() {
-		const { itemId, data, isFetch, requestBoardItem } = this.props;
+		const {
+			itemId,
+			data,
+			isFetch,
+			requestBoardItem,
+			requestColumnItems,
+		} = this.props;
 
 		if (typeof data === "undefined" && isFetch === false) {
 			requestBoardItem(itemId);
 		}
+		requestColumnItems({ boardId: itemId });
 	}
 
 	render() {
@@ -71,7 +72,7 @@ class Board extends PureComponent<BoardProps> {
 						return (
 							<KanBanBoard>
 								{columns.map((column, key) => (
-									<KanBanColumn key={`columnId-${key}`} {...column} />
+									<Column key={`columnId-${key}`} itemId={column.id} />
 								))}
 							</KanBanBoard>
 						);
