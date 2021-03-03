@@ -1,6 +1,12 @@
 import { handle } from "redux-pack";
 
-import { CREATE, UPDATE, FETCH, FETCH_LIST } from "../actions/columnAction";
+import {
+	CREATE,
+	FETCH,
+	FETCH_LIST,
+	UPDATE,
+	DELETE,
+} from "../actions/columnAction";
 
 const initialState = {
 	ids: [],
@@ -16,14 +22,15 @@ const initialState = {
 };
 
 const boardReducers = (state = initialState, action) => {
-	const { type, payload } = action;
+	const { type, payload, meta } = action;
 	// const { resourceName, key } = meta || {};
 
 	switch (type) {
 		case CREATE:
-		case UPDATE:
 		case FETCH:
 		case FETCH_LIST:
+		case UPDATE:
+		case DELETE:
 			return handle(state, action, {
 				start: (prevState) => ({
 					...prevState,
@@ -62,8 +69,20 @@ const boardReducers = (state = initialState, action) => {
 							);
 
 							return { ids, entities };
+						} else if (type === DELETE) {
+							const { deleteItemId } = meta;
+							const ids = prevState.ids.filter((id) => id !== deleteItemId);
+							const entities = ids.reduce(
+								(fianl, id) => ({
+									...fianl,
+									[id]: prevState.entities[id],
+								}),
+								{}
+							);
+
+							return { ids, entities };
 						} else {
-							// FETCH
+							// FETCH, CREATE, UPDATE
 							const { id } = data;
 
 							const ids = [...prevState.ids];

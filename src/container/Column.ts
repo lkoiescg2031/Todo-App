@@ -14,6 +14,7 @@ import {
 import {
 	fetch as requestColumnItem,
 	updateItem as requestUpdateColumn,
+	deleteItem as requestDeleteColumn,
 } from "../redux/actions/columnAction";
 import { fetchList as requestCardItems } from "../redux/actions/cardAction";
 
@@ -34,6 +35,7 @@ const mapDispatchToProps = {
 	requestColumnItem,
 	requestCardItems,
 	requestUpdateColumn,
+	requestDeleteColumn,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Column);

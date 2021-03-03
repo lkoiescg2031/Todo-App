@@ -5,9 +5,10 @@ const key = "column";
 export const resourceName = `/${key}`;
 
 export const CREATE = `${resourceName}/CREATE`;
-export const UPDATE = `${resourceName}/UPDATE`;
 export const FETCH = `${resourceName}/FETCH`;
 export const FETCH_LIST = `${resourceName}/FETCH_LIST`;
+export const UPDATE = `${resourceName}/UPDATE`;
+export const DELETE = `${resourceName}/DELETE`;
 
 export function fetch(id, params = {}, meta = {}) {
 	return {
@@ -44,6 +45,7 @@ export function createItem(params = {}, meta = {}) {
 		},
 	};
 }
+
 export function updateItem(id, params = {}, meta = {}) {
 	return {
 		type: UPDATE,
@@ -52,6 +54,19 @@ export function updateItem(id, params = {}, meta = {}) {
 			...meta,
 			key,
 			resourceName,
+		},
+	};
+}
+
+export function deleteItem(id, params = {}, meta = {}) {
+	return {
+		type: DELETE,
+		promise: api.delete(`${resourceName}/${id}`, { params }),
+		meta: {
+			...meta,
+			key,
+			resourceName,
+			deleteItemId: id,
 		},
 	};
 }

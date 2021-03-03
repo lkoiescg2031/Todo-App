@@ -29,6 +29,7 @@ interface ColumnProps {
 	requestColumnItem: (id: number, params?: {}, meta?: {}) => void;
 	requestUpdateColumn: (id: number, params?: {}, meta?: {}) => void;
 	requestCardItems: (params?: {}, meta?: {}) => void;
+	requestDeleteColumn: (id: number, params?: {}, meta?: {}) => void;
 	classes: {
 		skeleton: string;
 	};
@@ -67,7 +68,10 @@ class Column extends PureComponent<ColumnProps> {
 	}
 
 	handleDeleteColumn() {
-		// TODO delete this menu
+		const { itemId, requestDeleteColumn } = this.props;
+
+		requestDeleteColumn(itemId);
+		this.forceUpdate();
 	}
 
 	componentDidMount() {
