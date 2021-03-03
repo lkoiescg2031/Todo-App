@@ -1,63 +1,63 @@
 {
-	"board": [
-		{
-			"id": 1,
-			"name": "포트폴리오 앱 만들기",
-			"desc": "포트폴리오 앱 만들기 2020-02-25"
-		}
-	],
-	"column": [
-		{
-			"id": 1,
-			"name": "To Do",
-			"boardId": 1
-		},
-		{
-			"id": 2,
-			"name": "In Progress",
-			"boardId": 1
-		},
-		{
-			"id": 3,
-			"name": "Done",
-			"boardId": 1
-		},
-		{
-			"id": 4,
-			"name": "issue",
-			"boardId": 1
-		}
-	],
-	"card": [
-		{
-			"id": 1,
-			"name": "포트폴리오 앱 만들기 1",
-			"columnId": 2,
-			"boardId": 1
-		},
-		{
-			"id": 2,
-			"name": "포트폴리오 앱 만들기 3",
-			"columnId": 1,
-			"boardId": 1
-		},
-		{
-			"id": 3,
-			"name": "포트폴리오 앱 만들기 3",
-			"columnId": 1,
-			"boardId": 1
-		},
-		{
-			"id": 4,
-			"name": "포트폴리오 앱 만들기 4",
-			"columnId": 1,
-			"boardId": 1
-		},
-		{
-			"id": 5,
-			"name": "포트폴리오 앱만 들기 5",
-			"columnId": 2,
-			"boardId": 1
-		}
-	]
+  "board": [
+    {
+      "id": 1,
+      "name": "포트폴리오 앱 만들기",
+      "desc": "포트폴리오 앱 만들기 2020-02-25"
+    }
+  ],
+  "column": [
+    {
+      "id": 1,
+      "name": "To Do",
+      "boardId": 1
+    },
+    {
+      "id": 2,
+      "name": "In Progress",
+      "boardId": 1
+    },
+    {
+      "id": 3,
+      "name": "Done",
+      "boardId": 1
+    },
+    {
+      "id": 4,
+      "name": "Issue",
+      "boardId": 1
+    }
+  ],
+  "card": [
+    {
+      "id": 1,
+      "name": "포트폴리오 앱 만들기 1",
+      "columnId": 2,
+      "boardId": 1
+    },
+    {
+      "id": 2,
+      "name": "포트폴리오 앱 만들기 3",
+      "columnId": 1,
+      "boardId": 1
+    },
+    {
+      "id": 3,
+      "name": "포트폴리오 앱 만들기 3",
+      "columnId": 1,
+      "boardId": 1
+    },
+    {
+      "id": 4,
+      "name": "포트폴리오 앱 만들기 4",
+      "columnId": 1,
+      "boardId": 1
+    },
+    {
+      "id": 5,
+      "name": "포트폴리오 앱만 들기 5",
+      "columnId": 2,
+      "boardId": 1
+    }
+  ]
 }
