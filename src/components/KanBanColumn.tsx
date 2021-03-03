@@ -4,15 +4,10 @@ import { withStyles } from "@material-ui/core/styles";
 
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardActions from "@material-ui/core/CardActions";
-
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-
-import AddIcon from "@material-ui/icons/Add";
 
 import grey from "@material-ui/core/colors/grey";
 
+import CardCreateButton from "./CardCreateButton";
 import ColumnMenuButton from "./ColumnMenuButton";
 import ColumnTitle from "./ColumnTitle";
 
@@ -21,7 +16,6 @@ interface KanBanColumnProp {
 	classes: {
 		columns: string;
 		works: string;
-		addButton: string;
 	};
 }
 
@@ -50,8 +44,14 @@ class KanBanColumns extends PureComponent<KanBanColumnProp, KanBanColumnState> {
 
 	render() {
 		const { classes, children, name } = this.props;
+		const childNode = (children as Array<any>).filter(
+			(child) => typeof child !== "boolean"
+		)[0];
+
 		const appendCardText =
-			typeof children === "undefined" ? "Add a card" : "Add another card";
+			Array.isArray(childNode) && childNode.length === 0
+				? "Add a card"
+				: "Add another card";
 
 		return (
 			<Card elevation={2} classes={{ root: classes.columns }}>
@@ -59,16 +59,10 @@ class KanBanColumns extends PureComponent<KanBanColumnProp, KanBanColumnState> {
 					title={<ColumnTitle value={name} initialMode="text" />}
 					action={<ColumnMenuButton />}
 				/>
-				<div className={classes.works}>{children}</div>
-				<CardActions>
-					<Button
-						classes={{ root: classes.addButton }}
-						startIcon={<AddIcon fontSize="inherit" />}
-						fullWidth
-					>
-						<Typography variant="body1">{appendCardText}</Typography>
-					</Button>
-				</CardActions>
+				<div className={classes.works}>
+					{children}
+					<CardCreateButton text={appendCardText} />
+				</div>
 			</Card>
 		);
 	}
@@ -86,9 +80,5 @@ export default withStyles((theme) => ({
 		"& > div": {
 			margin: `${theme.spacing(1)}px 0px`,
 		},
-	},
-	addButton: {
-		textTransform: "none",
-		justifyContent: "left",
 	},
 }))(KanBanColumns);

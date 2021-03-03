@@ -12,12 +12,18 @@ const initialState = {
 	ids: [],
 	entities: {},
 	loadingState: {
-		[FETCH_LIST]: false,
 		[CREATE]: false,
+		[FETCH]: false,
+		[FETCH_LIST]: false,
+		[UPDATE]: false,
+		[DELETE]: false,
 	},
 	errorState: {
-		[FETCH_LIST]: false,
 		[CREATE]: false,
+		[FETCH]: false,
+		[FETCH_LIST]: false,
+		[UPDATE]: false,
+		[DELETE]: false,
 	},
 };
 

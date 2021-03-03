@@ -23,13 +23,19 @@ interface CardItem {
 
 interface ColumnProps {
 	itemId: number;
+	boardId: number;
 	data?: ColumnItem;
 	isFetch: boolean;
 	cards?: CardItem[];
 	requestColumnItem: (id: number, params?: {}, meta?: {}) => void;
 	requestUpdateColumn: (id: number, params?: {}, meta?: {}) => void;
-	requestCardItems: (params?: {}, meta?: {}) => void;
 	requestDeleteColumn: (id: number, params?: {}, meta?: {}) => void;
+	requestCardItems: (params?: {}, meta?: {}) => void;
+	requestCreateCard: (card: {
+		name: string;
+		columnId: number;
+		boardId: number;
+	}) => void;
 	classes: {
 		skeleton: string;
 	};
@@ -41,6 +47,7 @@ class Column extends PureComponent<ColumnProps> {
 		requestColumnItem: () => {},
 		requestUpdateColumn: () => {},
 		requestCardItems: () => {},
+		requestCreateCard: () => {},
 	};
 
 	constructor(props: ColumnProps) {
@@ -50,16 +57,17 @@ class Column extends PureComponent<ColumnProps> {
 		this.handleRetrieveColumn = this.handleRetrieveColumn.bind(this);
 		this.handleUpdateColumnTitle = this.handleUpdateColumnTitle.bind(this);
 		this.handleDeleteColumn = this.handleDeleteColumn.bind(this);
+		this.handleCreateCard = this.handleCreateCard.bind(this);
 	}
 
 	handleRetrieveColumn() {
-		const { itemId, data, isFetch } = this.props;
+		const { boardId, itemId, data, isFetch } = this.props;
 		const { requestColumnItem, requestCardItems } = this.props;
 
 		if (typeof data === "undefined" && isFetch === false) {
 			requestColumnItem(itemId);
 		}
-		requestCardItems({ columnId: itemId });
+		requestCardItems({ columnId: itemId, boardId });
 	}
 
 	handleUpdateColumnTitle(newValue: string, prevValue: string) {
@@ -72,6 +80,12 @@ class Column extends PureComponent<ColumnProps> {
 
 		requestDeleteColumn(itemId);
 		this.forceUpdate();
+	}
+
+	handleCreateCard(name: string) {
+		const { itemId: columnId, boardId, requestCreateCard } = this.props;
+
+		requestCreateCard({ name, columnId, boardId });
 	}
 
 	componentDidMount() {
@@ -87,6 +101,7 @@ class Column extends PureComponent<ColumnProps> {
 				value={{
 					updateColumnTitle: this.handleUpdateColumnTitle,
 					deleteColumn: this.handleDeleteColumn,
+					createCard: this.handleCreateCard,
 				}}
 			>
 				<KanBanColumn name={name ?? ""}>

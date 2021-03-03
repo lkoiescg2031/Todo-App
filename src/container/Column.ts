@@ -16,7 +16,10 @@ import {
 	updateItem as requestUpdateColumn,
 	deleteItem as requestDeleteColumn,
 } from "../redux/actions/columnAction";
-import { fetchList as requestCardItems } from "../redux/actions/cardAction";
+import {
+	fetchList as requestCardItems,
+	create as requestCreateCard,
+} from "../redux/actions/cardAction";
 
 //FIXME 새로 추가된 경우의 컴포넌트만 카드 정보를 조회하도록 설정
 
@@ -36,6 +39,7 @@ const mapDispatchToProps = {
 	requestCardItems,
 	requestUpdateColumn,
 	requestDeleteColumn,
+	requestCreateCard,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Column);

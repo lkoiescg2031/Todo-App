@@ -22,8 +22,11 @@ const useKanBanBoardStyles = makeStyles((theme) => ({
 
 function KanBanBoard({ children }: KanBanBoardProps) {
 	const classes = useKanBanBoardStyles();
+
 	const appendText =
-		typeof children === "undefined" ? "Add list" : "Add another list";
+		typeof children !== "undefined" && (children as Array<any>).length === 0
+			? "Add list"
+			: "Add another list";
 
 	return (
 		<div className={classes.boardWrapper}>

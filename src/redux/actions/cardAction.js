@@ -4,8 +4,21 @@ const key = "card";
 
 export const resourceName = `/${key}`;
 
+export const CREATE = `${resourceName}/CREATE`;
 export const FETCH = `${resourceName}/FETCH`;
 export const FETCH_LIST = `${resourceName}/FETCH_LIST`;
+
+export function create(params = {}, meta = {}) {
+	return {
+		type: CREATE,
+		promise: api.post(`${resourceName}`, params),
+		meta: {
+			...meta,
+			key,
+			resourceName,
+		},
+	};
+}
 
 export function fetch(id, params = {}, meta = {}) {
 	return {
