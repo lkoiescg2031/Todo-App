@@ -66,7 +66,7 @@ export function deleteItem(id, params = {}, meta = {}) {
 			...meta,
 			key,
 			resourceName,
-			deleteItemId: id,
+			itemId: id,
 		},
 	};
 }

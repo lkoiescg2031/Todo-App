@@ -70,8 +70,8 @@ const boardReducers = (state = initialState, action) => {
 
 							return { ids, entities };
 						} else if (type === DELETE) {
-							const { deleteItemId } = meta;
-							const ids = prevState.ids.filter((id) => id !== deleteItemId);
+							const { itemId } = meta;
+							const ids = prevState.ids.filter((id) => id !== itemId);
 							const entities = ids.reduce(
 								(fianl, id) => ({
 									...fianl,
