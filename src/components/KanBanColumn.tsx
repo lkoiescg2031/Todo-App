@@ -7,19 +7,17 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardActions from "@material-ui/core/CardActions";
 
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 
 import AddIcon from "@material-ui/icons/Add";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import grey from "@material-ui/core/colors/grey";
 
-import EditableText from "./EditableText";
+import ColumnMenuButton from "./ColumnMenuButton";
+import ColumnTitle from "./ColumnTitle";
 
 interface KanBanColumnProp {
 	name: string;
-	onTitleChanged: (newValue: string, prevValue: string) => void;
 	classes: {
 		columns: string;
 		works: string;
@@ -34,10 +32,6 @@ interface KanBanColumnState {
 export const Width = "260px";
 
 class KanBanColumns extends PureComponent<KanBanColumnProp, KanBanColumnState> {
-	static defautProps = {
-		onTitleChanged: () => {},
-	};
-
 	constructor(props: KanBanColumnProp) {
 		super(props);
 
@@ -55,25 +49,15 @@ class KanBanColumns extends PureComponent<KanBanColumnProp, KanBanColumnState> {
 	}
 
 	render() {
-		const { classes, children, name, onTitleChanged } = this.props;
+		const { classes, children, name } = this.props;
 		const appendCardText =
 			typeof children === "undefined" ? "Add a card" : "Add another card";
 
 		return (
 			<Card elevation={2} classes={{ root: classes.columns }}>
 				<CardHeader
-					title={
-						<EditableText
-							value={name}
-							initialMode="text"
-							onTextChanged={onTitleChanged}
-						/>
-					}
-					action={
-						<IconButton>
-							<MoreVertIcon />
-						</IconButton>
-					}
+					title={<ColumnTitle value={name} initialMode="text" />}
+					action={<ColumnMenuButton />}
 				/>
 				<div className={classes.works}>{children}</div>
 				<CardActions>

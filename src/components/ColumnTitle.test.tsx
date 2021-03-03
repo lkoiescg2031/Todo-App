@@ -2,7 +2,7 @@ import React from "react";
 
 import { render } from "@testing-library/react";
 
-import EditableText from "./EditableText";
+import EditableText from "./ColumnTitle";
 import { Mouse } from "@material-ui/icons";
 
 describe("<EditableText />", () => {

@@ -1,10 +1,9 @@
 import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
-import AddColumn from "./AddColumnButton";
+import AddColumnButton from "./ColumnCreateButton";
 
 interface KanBanBoardProps {
-	onAddColumn: (title: string) => void;
 	children?: React.ReactNode;
 }
 
@@ -21,7 +20,7 @@ const useKanBanBoardStyles = makeStyles((theme) => ({
 	},
 }));
 
-function KanBanBoard({ onAddColumn, children }: KanBanBoardProps) {
+function KanBanBoard({ children }: KanBanBoardProps) {
 	const classes = useKanBanBoardStyles();
 	const appendText =
 		typeof children === "undefined" ? "Add list" : "Add another list";
@@ -30,14 +29,10 @@ function KanBanBoard({ onAddColumn, children }: KanBanBoardProps) {
 		<div className={classes.boardWrapper}>
 			<div className={classes.board}>
 				{children}
-				<AddColumn text={appendText} onAddItem={onAddColumn} />
+				<AddColumnButton text={appendText} />
 			</div>
 		</div>
 	);
 }
-
-KanBanBoard.defaultProps = {
-	onAddColumn: () => {},
-};
 
 export default KanBanBoard;

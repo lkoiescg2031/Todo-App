@@ -16,10 +16,10 @@ import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 
 import { Width } from "./KanBanColumn";
+import BoardContext from "./BoardContext";
 
 interface AddColumnProps {
 	text: string;
-	onAddItem: (title: string) => void;
 	classes: {
 		wrapper: string;
 		accordianRoot: string;
@@ -38,9 +38,7 @@ interface AddColumnState {
 }
 
 class AddColumn extends PureComponent<AddColumnProps, AddColumnState> {
-	static defaultProps = {
-		onAddItem: () => {},
-	};
+	static contextType = BoardContext;
 
 	private inputRef: React.RefObject<HTMLInputElement>;
 
@@ -112,9 +110,12 @@ class AddColumn extends PureComponent<AddColumnProps, AddColumnState> {
 
 	handleAddItem() {
 		const target = this.inputRef.current;
+		const { createColumn } = this.context;
+
 		if (target && target.value !== "") {
 			// 아이템 추가 이벤트 발생
-			this.props.onAddItem(target.value);
+			createColumn(target.value);
+
 			// 아이템 추가
 			target.value = "";
 			target.focus();

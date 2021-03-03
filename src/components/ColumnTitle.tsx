@@ -3,10 +3,11 @@ import React, { KeyboardEvent, PureComponent } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
+import ColumnContext from "./ColumnContext";
+
 interface EditableTextProps {
 	value?: string;
 	initialMode?: "text" | "input";
-	onTextChanged: (newValue: string, prevValue: string) => void;
 	classes: {
 		spanText: string;
 	};
@@ -21,9 +22,7 @@ interface EditableTextState {
 }
 
 class EditableText extends PureComponent<EditableTextProps, EditableTextState> {
-	static defaultProps = {
-		onTextChanged: () => {},
-	};
+	static contextType = ColumnContext;
 
 	constructor(props: EditableTextProps) {
 		super(props);
@@ -74,13 +73,12 @@ class EditableText extends PureComponent<EditableTextProps, EditableTextState> {
 	}
 
 	setTextMode() {
-		let newValue = this.state.value;
+		const { updateColumnTitle } = this.context;
+		const { value, prevValue } = this.state;
 
-		if (newValue === "") {
-			newValue = this.state.prevValue;
-		}
+		const newValue = value.length === 0 ? prevValue : value;
 
-		this.props.onTextChanged(newValue, this.state.prevValue);
+		updateColumnTitle(newValue, prevValue);
 
 		this.setState(
 			(prevState) => ({

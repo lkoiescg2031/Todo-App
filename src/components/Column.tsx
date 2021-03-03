@@ -6,6 +6,8 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import KanBanColumn from "./KanBanColumn";
 import KanBanCard from "./KanBanCard";
 
+import ColumnContext from "./ColumnContext";
+
 export interface ColumnItem {
 	id: number;
 	name: string;
@@ -44,15 +46,12 @@ class Column extends PureComponent<ColumnProps> {
 		super(props);
 
 		this.state = {};
-		this.handleTitleChange = this.handleTitleChange.bind(this);
+		this.handleRetrieveColumn = this.handleRetrieveColumn.bind(this);
+		this.handleUpdateColumnTitle = this.handleUpdateColumnTitle.bind(this);
+		this.handleDeleteColumn = this.handleDeleteColumn.bind(this);
 	}
 
-	handleTitleChange(newValue: string, prevValue: string) {
-		const { itemId, data, requestUpdateColumn } = this.props;
-		requestUpdateColumn(itemId, { ...data, name: newValue });
-	}
-
-	componentDidMount() {
+	handleRetrieveColumn() {
 		const { itemId, data, isFetch } = this.props;
 		const { requestColumnItem, requestCardItems } = this.props;
 
@@ -62,30 +61,46 @@ class Column extends PureComponent<ColumnProps> {
 		requestCardItems({ columnId: itemId });
 	}
 
+	handleUpdateColumnTitle(newValue: string, prevValue: string) {
+		const { itemId, data, requestUpdateColumn } = this.props;
+		requestUpdateColumn(itemId, { ...data, name: newValue });
+	}
+
+	handleDeleteColumn() {
+		// TODO delete this menu
+	}
+
+	componentDidMount() {
+		this.handleRetrieveColumn();
+	}
+
 	render() {
 		const { classes, itemId, data, cards, isFetch } = this.props;
 		const { name } = data || {};
 
-		if (isFetch) {
-			return (
-				<KanBanColumn name={name ?? ""} onTitleChanged={this.handleTitleChange}>
-					<div className={classes.skeleton}>
-						<Skeleton variant="rect" animation="wave" height={40} />
-						<Skeleton variant="rect" animation="wave" height={40} />
-						<Skeleton variant="rect" animation="wave" height={40} />
-						<Skeleton variant="rect" animation="wave" height={40} />
-					</div>
+		return (
+			<ColumnContext.Provider
+				value={{
+					updateColumnTitle: this.handleUpdateColumnTitle,
+					deleteColumn: this.handleDeleteColumn,
+				}}
+			>
+				<KanBanColumn name={name ?? ""}>
+					{isFetch && (
+						<div className={classes.skeleton}>
+							<Skeleton variant="rect" animation="wave" height={40} />
+							<Skeleton variant="rect" animation="wave" height={40} />
+							<Skeleton variant="rect" animation="wave" height={40} />
+							<Skeleton variant="rect" animation="wave" height={40} />
+						</div>
+					)}
+					{isFetch ||
+						cards?.map(({ name }, idx) => (
+							<KanBanCard key={`card-${itemId}-${idx}`} title={name} />
+						))}
 				</KanBanColumn>
-			);
-		} else {
-			return (
-				<KanBanColumn name={name ?? ""} onTitleChanged={this.handleTitleChange}>
-					{cards?.map(({ name }, idx) => (
-						<KanBanCard key={`card-${itemId}-${idx}`} title={name} />
-					))}
-				</KanBanColumn>
-			);
-		}
+			</ColumnContext.Provider>
+		);
 	}
 }
 

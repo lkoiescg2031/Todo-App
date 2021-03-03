@@ -30,29 +30,34 @@ exports[`<KanBanBoard /> snapshot test 1`] = `
           <div
             class="MuiCardHeader-action"
           >
-            <button
-              class="MuiButtonBase-root MuiIconButton-root"
-              tabindex="0"
-              type="button"
-            >
-              <span
-                class="MuiIconButton-label"
+            <div>
+              <button
+                aria-controls="column-menu"
+                aria-haspopup="true"
+                aria-label="more"
+                class="MuiButtonBase-root MuiIconButton-root"
+                tabindex="0"
+                type="button"
               >
-                <svg
-                  aria-hidden="true"
-                  class="MuiSvgIcon-root"
-                  focusable="false"
-                  viewBox="0 0 24 24"
+                <span
+                  class="MuiIconButton-label"
                 >
-                  <path
-                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-                  />
-                </svg>
-              </span>
-              <span
-                class="MuiTouchRipple-root"
-              />
-            </button>
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                    />
+                  </svg>
+                </span>
+                <span
+                  class="MuiTouchRipple-root"
+                />
+              </button>
+            </div>
           </div>
         </div>
         <div
@@ -96,15 +101,15 @@ exports[`<KanBanBoard /> snapshot test 1`] = `
         </div>
       </div>
       <div
-        class="AddColumn-wrapper-7"
+        class="AddColumn-wrapper-10"
       >
         <div
-          class="MuiPaper-root MuiAccordion-root AddColumn-accordianRoot-8 MuiAccordion-rounded MuiPaper-elevation0 MuiPaper-rounded"
+          class="MuiPaper-root MuiAccordion-root AddColumn-accordianRoot-11 MuiAccordion-rounded MuiPaper-elevation0 MuiPaper-rounded"
         >
           <div
             aria-disabled="false"
             aria-expanded="false"
-            class="MuiButtonBase-root MuiAccordionSummary-root AddColumn-summaryRoot-10"
+            class="MuiButtonBase-root MuiAccordionSummary-root AddColumn-summaryRoot-13"
             role="button"
             tabindex="0"
           >
@@ -112,7 +117,7 @@ exports[`<KanBanBoard /> snapshot test 1`] = `
               class="MuiAccordionSummary-content"
             >
               <div
-                class="AddColumn-addTextWrapper-11"
+                class="AddColumn-addTextWrapper-14"
               >
                 <svg
                   aria-hidden="true"
@@ -127,7 +132,7 @@ exports[`<KanBanBoard /> snapshot test 1`] = `
                 Add another list
               </div>
               <div
-                class="MuiFormControl-root MuiTextField-root AddColumn-inputRoot-12 AddColumn-hidden-13"
+                class="MuiFormControl-root MuiTextField-root AddColumn-inputRoot-15 AddColumn-hidden-16"
               >
                 <div
                   class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
@@ -141,11 +146,11 @@ exports[`<KanBanBoard /> snapshot test 1`] = `
                   />
                   <fieldset
                     aria-hidden="true"
-                    class="PrivateNotchedOutline-root-14 MuiOutlinedInput-notchedOutline"
+                    class="PrivateNotchedOutline-root-17 MuiOutlinedInput-notchedOutline"
                     style="padding-left: 8px;"
                   >
                     <legend
-                      class="PrivateNotchedOutline-legend-15"
+                      class="PrivateNotchedOutline-legend-18"
                       style="width: 0.01px;"
                     >
                       <span>

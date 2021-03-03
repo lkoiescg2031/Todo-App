@@ -8,6 +8,7 @@ import AppLayoutContext from "../layout/Applayout/Context";
 
 import KanBanBoard from "./KanBanBoard";
 import Column from "../container/Column";
+import BoardContext from "./BoardContext";
 
 //add defs
 import { ColumnItem } from "./Column";
@@ -81,25 +82,26 @@ class Board extends PureComponent<BoardProps> {
 	render() {
 		const { classes, isFetch, columns } = this.props;
 
-		if (isFetch) {
-			return (
-				<div className={classes.skeleton}>
-					<Skeleton animation="wave" variant="rect" height={280} />
-					<Skeleton animation="wave" variant="rect" height={200} />
-					<Skeleton animation="wave" variant="rect" height={380} />
-					<Skeleton animation="wave" variant="rect" height={280} />
-					<Skeleton animation="wave" variant="rect" height={36} />
-				</div>
-			);
-		} else {
-			return (
-				<KanBanBoard onAddColumn={this.handleAddColumn}>
-					{columns.map((column, key) => (
-						<Column key={`columnId-${key}`} itemId={column.id} />
-					))}
-				</KanBanBoard>
-			);
-		}
+		return (
+			<BoardContext.Provider value={{ createColumn: this.handleAddColumn }}>
+				{isFetch && (
+					<div className={classes.skeleton}>
+						<Skeleton animation="wave" variant="rect" height={280} />
+						<Skeleton animation="wave" variant="rect" height={200} />
+						<Skeleton animation="wave" variant="rect" height={380} />
+						<Skeleton animation="wave" variant="rect" height={280} />
+						<Skeleton animation="wave" variant="rect" height={36} />
+					</div>
+				)}
+				{isFetch || (
+					<KanBanBoard>
+						{columns.map((column, key) => (
+							<Column key={`columnId-${key}`} itemId={column.id} />
+						))}
+					</KanBanBoard>
+				)}
+			</BoardContext.Provider>
+		);
 	}
 }
 
