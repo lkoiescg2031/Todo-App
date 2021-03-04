@@ -22,7 +22,7 @@ export interface BoardItem {
 
 interface BoardProps {
 	itemId: number;
-	data?: BoardItem;
+	data: BoardItem;
 	columns: ColumnItem[];
 	classes: {
 		boardWrapper: string;

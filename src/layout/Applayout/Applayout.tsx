@@ -1,5 +1,8 @@
 import React, { PureComponent } from "react";
 
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+
 import { withStyles } from "@material-ui/core/styles";
 
 import AppBar from "@material-ui/core/AppBar";
@@ -42,27 +45,29 @@ class AppLayout extends PureComponent<AppLayoutProps, AppLayoutState> {
 		const { subtitle } = this.state;
 
 		return (
-			<Context.Provider value={{ subtitle, setSubtitle: this.setSubtitle }}>
-				<AppBar>
-					<ToolBar>
-						<Typography
-							role="heading"
-							variant="h4"
-							classes={{ root: classes.title }}
-						>
-							<Hidden xsDown implementation="css">
-								{typeof subtitle === "undefined"
-									? title
-									: `${title} | ${subtitle}`}
-							</Hidden>
-							<Hidden smUp implementation="css">
-								{typeof subtitle === "undefined" ? title : subtitle}
-							</Hidden>
-						</Typography>
-					</ToolBar>
-				</AppBar>
-				<main className={classes.main}>{children}</main>
-			</Context.Provider>
+			<DndProvider backend={HTML5Backend}>
+				<Context.Provider value={{ subtitle, setSubtitle: this.setSubtitle }}>
+					<AppBar>
+						<ToolBar>
+							<Typography
+								role="heading"
+								variant="h4"
+								classes={{ root: classes.title }}
+							>
+								<Hidden xsDown implementation="css">
+									{typeof subtitle === "undefined"
+										? title
+										: `${title} | ${subtitle}`}
+								</Hidden>
+								<Hidden smUp implementation="css">
+									{typeof subtitle === "undefined" ? title : subtitle}
+								</Hidden>
+							</Typography>
+						</ToolBar>
+					</AppBar>
+					<main className={classes.main}>{children}</main>
+				</Context.Provider>
+			</DndProvider>
 		);
 	}
 }

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import Column from "../components/Column/Column";
+import DroppableColumn from "../components/Column/DropableColumn";
 
 import {
 	entitySelector as columnSelector,
@@ -19,6 +19,7 @@ import {
 import {
 	fetchList as requestFetchTasks,
 	create as requestCreateTask,
+	updateItem as requestUpdateTask,
 } from "../redux/actions/taskAction";
 
 //FIXME 새로 추가된 경우의 컴포넌트만 카드 정보를 조회하도록 설정
@@ -40,6 +41,7 @@ const mapDispatchToProps = {
 	requestUpdateColumn,
 	requestDeleteColumn,
 	requestCreateTask,
+	requestUpdateTask,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Column);
+export default connect(mapStateToProps, mapDispatchToProps)(DroppableColumn);

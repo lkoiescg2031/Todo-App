@@ -1,5 +1,7 @@
 import React, { PureComponent } from "react";
 
+import { DragElementWrapper, DragPreviewOptions } from "react-dnd";
+
 import { withStyles } from "@material-ui/core/styles";
 
 import Dialog from "@material-ui/core/Dialog";
@@ -20,10 +22,26 @@ export interface TaskItem {
 
 interface TaskProps {
 	itemId: number;
-	data?: TaskItem;
+	data: TaskItem;
+}
+
+export interface TaskContainerProps extends TaskProps {
+	requestDeleteTask: (id: number, params?: {}, meta?: {}) => void;
+	requestUpdateTask: (
+		id: number,
+		data: { name?: string; columnId?: number; boardId?: number },
+		meta?: {}
+	) => void;
+}
+
+interface DraggableTaskProps extends TaskContainerProps {
+	dragPreviewRef: DragElementWrapper<DragPreviewOptions>;
+}
+
+interface TaskStylesProps extends DraggableTaskProps {
 	classes: {
 		root: string;
-		actionArea: string;
+		title: string;
 		dialogContainer: string;
 		dialogPaper: string;
 		dialogContent: string;
@@ -35,26 +53,17 @@ interface TaskProps {
 	};
 }
 
-interface TaskContainerProps extends TaskProps {
-	requestDeleteTask: (id: number, params?: {}, meta?: {}) => void;
-	requestUpdateTask: (
-		id: number,
-		data: { name?: string; columnId?: number; boardId?: number },
-		meta?: {}
-	) => void;
-}
-
 interface TaskState {
 	isOpen: boolean;
 }
 
-class Task extends PureComponent<TaskContainerProps, TaskState> {
+class Task extends PureComponent<TaskStylesProps, TaskState> {
 	private cardRef: React.RefObject<HTMLDivElement>;
 	private dialogInnerRef: React.RefObject<HTMLDivElement>;
 	private textFieldRef: React.RefObject<HTMLDivElement>;
 	private inputRef: React.RefObject<HTMLInputElement>;
 
-	constructor(props: TaskContainerProps) {
+	constructor(props: TaskStylesProps) {
 		super(props);
 
 		this.state = { isOpen: false };
@@ -122,17 +131,19 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 	}
 
 	render() {
-		const { data, classes } = this.props;
+		const { data, dragPreviewRef, classes } = this.props;
 		const { name: title } = data || {};
 		const { isOpen } = this.state;
 
 		return (
 			<Card ref={this.cardRef} classes={{ root: classes.root }}>
-				<CardActionArea
-					classes={{ root: classes.actionArea }}
-					onClick={this.openDialog}
-				>
-					<Typography component="pre" variant="body1">
+				<CardActionArea onClick={this.openDialog}>
+					<Typography
+						ref={dragPreviewRef}
+						classes={{ root: classes.title }}
+						component="pre"
+						variant="body1"
+					>
 						{title}
 					</Typography>
 				</CardActionArea>
@@ -195,7 +206,7 @@ export default withStyles((theme) => ({
 	root: {
 		position: "relative",
 	},
-	actionArea: {
+	title: {
 		padding: theme.spacing(1),
 	},
 	dialogContainer: {

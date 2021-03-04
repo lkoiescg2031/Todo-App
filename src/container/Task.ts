@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import Task from "../components/Task/Task";
+import Task from "../components/Task/DraggableTask";
 
 import {
 	updateItem as requestUpdateTask,

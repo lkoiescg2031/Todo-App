@@ -26,17 +26,11 @@ export interface ColumnItem {
 
 interface ColumnProps {
 	itemId: number;
-	data?: ColumnItem;
-	tasks?: TaskItem[];
-	classes: {
-		columns: string;
-		taskScroll: string;
-		tasks: string;
-		skeleton: string;
-	};
+	data: ColumnItem;
+	tasks: TaskItem[];
 }
 
-interface ColumnContainerProps extends ColumnProps {
+export interface ColumnContainerProps extends ColumnProps {
 	isLoading: boolean;
 	requestColumnItem: (id: number, params?: {}, meta?: {}) => void;
 	requestUpdateColumn: (id: number, params?: {}, meta?: {}) => void;
@@ -49,11 +43,20 @@ interface ColumnContainerProps extends ColumnProps {
 	}) => void;
 }
 
-class Column extends PureComponent<ColumnContainerProps> {
+interface ColumnStylesProps extends ColumnContainerProps {
+	classes: {
+		columns: string;
+		taskScroll: string;
+		tasks: string;
+		skeleton: string;
+	};
+}
+
+class Column extends PureComponent<ColumnStylesProps> {
 	private taskScrollRef: React.RefObject<HTMLDivElement>;
 	private tasksRef: React.RefObject<HTMLDivElement>;
 
-	constructor(props: ColumnContainerProps) {
+	constructor(props: ColumnStylesProps) {
 		super(props);
 
 		this.state = {};
