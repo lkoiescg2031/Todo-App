@@ -24,7 +24,6 @@ interface TaskProps {
 	classes: {
 		root: string;
 		actionArea: string;
-		titleInner: string;
 		dialogContainer: string;
 		dialogPaper: string;
 		dialogContent: string;
@@ -108,21 +107,18 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 		const inputEle = this.inputRef.current;
 		if (inputEle) {
 			const name = inputEle.value;
-			requestUpdateTask(
-				itemId,
-				{ ...data, name },
-				{ onSuccess: this.onRequestSuccess }
-			);
+			requestUpdateTask(itemId, { ...data, name });
+			this.closeDialog();
 		}
 	}
 	onRequestSuccess() {
 		this.closeDialog();
 	}
 
-	//FIXME delete 시  UI 가 바로 제거 되지 않음
 	handleDelete() {
 		const { itemId, requestDeleteTask } = this.props;
-		requestDeleteTask(itemId, {}, { onSuccess: this.onRequestSuccess });
+		requestDeleteTask(itemId, {});
+		this.closeDialog();
 	}
 
 	render() {
@@ -136,8 +132,8 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 					classes={{ root: classes.actionArea }}
 					onClick={this.openDialog}
 				>
-					<Typography variant="body1">
-						<pre className={classes.titleInner}>{title}</pre>
+					<Typography component="pre" variant="body1">
+						{title}
 					</Typography>
 				</CardActionArea>
 				<Dialog
@@ -198,9 +194,6 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 export default withStyles((theme) => ({
 	root: {
 		position: "relative",
-	},
-	titleInner: {
-		margin: 0,
 	},
 	actionArea: {
 		padding: theme.spacing(1),
