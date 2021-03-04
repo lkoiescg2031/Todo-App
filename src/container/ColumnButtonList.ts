@@ -2,7 +2,8 @@ import { connect } from "react-redux";
 
 import ColumnButtonList from "../components/Task/ColumnButtonList";
 
-import { collectionSelector as columnsSelector } from "../redux/selectors/columnSelector";
+import columnSelectors from "../redux/selectors/columnSelector";
+const { collectionSelector: columnsSelector } = columnSelectors;
 
 const mapStateToProps = (state: {}) => ({
 	columns: columnsSelector(state),

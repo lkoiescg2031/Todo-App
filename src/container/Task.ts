@@ -2,10 +2,12 @@ import { connect } from "react-redux";
 
 import Task from "../components/Task/DraggableTask";
 
-import {
-	updateItem as requestUpdateTask,
-	deleteItem as requestDeleteTask,
-} from "../redux/actions/taskAction";
+import taskActions from "../redux/actions/taskAction";
+
+const {
+	updateItem: requestUpdateTask,
+	deleteItem: requestDeleteTask,
+} = taskActions;
 
 const mapStateToProps = (state: {}) => {
 	return {};

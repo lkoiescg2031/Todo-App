@@ -2,20 +2,24 @@ import { connect } from "react-redux";
 
 import Board from "../components/Board/Board";
 
-import {
-	entitySelector,
-	fetchLoadingStateSelector,
-} from "../redux/selectors/boardSelector";
-import {
-	collectionSelector as columnsSelector,
-	fetchListLoadingStateSelector,
-} from "../redux/selectors/columnSelector";
+import boardSelectors from "../redux/selectors/boardSelector";
+import columnSelectors from "../redux/selectors/columnSelector";
 
-import { fetch as requestBoardItem } from "../redux/actions/boardAction";
-import {
-	fetchList as requestColumnItems,
-	createItem as requestCreateColumn,
-} from "../redux/actions/columnAction";
+import boardActions from "../redux/actions/boardAction";
+import columnActions from "../redux/actions/columnAction";
+
+const { entitySelector, fetchLoadingStateSelector } = boardSelectors;
+const {
+	collectionSelector: columnsSelector,
+	fetchListLoadingStateSelector,
+} = columnSelectors;
+
+const { fetchItem: requestBoardItem } = boardActions;
+
+const {
+	fetchList: requestColumnItems,
+	createItem: requestCreateColumn,
+} = columnActions;
 
 const mapStateToProps = (state: {}, props: { itemId: number }) => {
 	const { itemId } = props;

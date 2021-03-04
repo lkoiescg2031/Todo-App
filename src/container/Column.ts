@@ -2,28 +2,34 @@ import { connect } from "react-redux";
 
 import DroppableColumn from "../components/Column/DropableColumn";
 
-import {
-	entitySelector as columnSelector,
-	fetchLoadingStateSelector as isColumFetchState,
-} from "../redux/selectors/columnSelector";
-import {
-	collectionSelector as taskSelector,
-	fetchListLoadingStateSelector as isTasksFetchState,
-} from "../redux/selectors/taskSelector";
+import columnSelectors from "../redux/selectors/columnSelector";
+import taskSelectors from "../redux/selectors/taskSelector";
 
-import {
-	fetch as requestColumnItem,
-	updateItem as requestUpdateColumn,
-	deleteItem as requestDeleteColumn,
-} from "../redux/actions/columnAction";
-import {
-	fetchList as requestFetchTasks,
-	create as requestCreateTask,
-	updateItem as requestUpdateTask,
-} from "../redux/actions/taskAction";
+import columnActions from "../redux/actions/columnAction";
+import taskActions from "../redux/actions/taskAction";
+
+const {
+	entitySelector: columnSelector,
+	fetchLoadingStateSelector: isColumFetchState,
+} = columnSelectors;
+const {
+	collectionSelector: taskSelector,
+	fetchListLoadingStateSelector: isTasksFetchState,
+} = taskSelectors;
+
+const {
+	fetchItem: requestColumnItem,
+	updateItem: requestUpdateColumn,
+	deleteItem: requestDeleteColumn,
+} = columnActions;
+
+const {
+	createItem: requestCreateTask,
+	fetchList: requestFetchTasks,
+	updateItem: requestUpdateTask,
+} = taskActions;
 
 //FIXME 새로 추가된 경우의 컴포넌트만 카드 정보를 조회하도록 설정
-
 const mapStateToProps = (state: {}, props: { itemId: number }) => {
 	const { itemId } = props;
 	return {
