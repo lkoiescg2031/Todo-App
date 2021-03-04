@@ -7,10 +7,10 @@ import Task from "./Task/Task";
 describe("<KanBanColumn />", () => {
 	it("snapshot test", () => {
 		const columnName = "TODO";
-		const cardNames = ["Work 1", "Work 2", "Work 3"];
+		const taskNames = ["Work 1", "Work 2", "Work 3"];
 		const utils = render(
 			<KanBanColumn name={columnName}>
-				{cardNames.map((name, idx) => (
+				{taskNames.map((name, idx) => (
 					<Task key={`work-${idx}`} title={name} />
 				))}
 			</KanBanColumn>
@@ -27,14 +27,14 @@ describe("<KanBanColumn />", () => {
 	});
 
 	it("no child append name test", () => {
-		const appendButtonName = "Add a card";
+		const appendButtonName = "Add a task";
 		const utils = render(<KanBanColumn name="Test" />);
 
 		const button = utils.getByText(appendButtonName);
 	});
 
 	it("has children append name test", () => {
-		const appendButtonName = "Add another card";
+		const appendButtonName = "Add another task";
 		const utils = render(
 			<KanBanColumn name="Test">
 				<Task title="Work 1" />
@@ -49,7 +49,7 @@ describe("<KanBanColumn />", () => {
 		const utils = render(
 			<KanBanColumn name="Test">
 				{childrenNames.map((name, idx) => (
-					<KanBanColumn key={`card=${idx}`} name={name} />
+					<Task key={`task-${idx}`} name={name} />
 				))}
 			</KanBanColumn>
 		);

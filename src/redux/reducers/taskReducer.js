@@ -6,7 +6,7 @@ import {
 	FETCH_LIST,
 	UPDATE,
 	DELETE,
-} from "../actions/cardAction";
+} from "../actions/taskAction";
 
 const initialState = {
 	ids: [],

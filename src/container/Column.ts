@@ -9,7 +9,7 @@ import {
 import {
 	collectionSelector as taskSelector,
 	fetchListLoadingStateSelector as isTasksFetchState,
-} from "../redux/selectors/cardSelector";
+} from "../redux/selectors/taskSelector";
 
 import {
 	fetch as requestColumnItem,
@@ -17,9 +17,9 @@ import {
 	deleteItem as requestDeleteColumn,
 } from "../redux/actions/columnAction";
 import {
-	fetchList as requestCardItems,
-	create as requestCreateCard,
-} from "../redux/actions/cardAction";
+	fetchList as requestFetchTasks,
+	create as requestCreateTask,
+} from "../redux/actions/taskAction";
 
 //FIXME 새로 추가된 경우의 컴포넌트만 카드 정보를 조회하도록 설정
 
@@ -36,10 +36,10 @@ const mapStateToProps = (state: {}, props: { itemId: number }) => {
 
 const mapDispatchToProps = {
 	requestColumnItem,
-	requestCardItems,
+	requestFetchTasks,
 	requestUpdateColumn,
 	requestDeleteColumn,
-	requestCreateCard,
+	requestCreateTask,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Column);

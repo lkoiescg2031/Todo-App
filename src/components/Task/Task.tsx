@@ -35,8 +35,8 @@ interface TaskProps {
 }
 
 interface TaskContainerProps extends TaskProps {
-	requestDeleteCard: (id: number, params?: {}, meta?: {}) => void;
-	requestUpdateCard: (
+	requestDeleteTask: (id: number, params?: {}, meta?: {}) => void;
+	requestUpdateTask: (
 		id: number,
 		data: { name?: string; columnId?: number; boardId?: number },
 		meta?: {}
@@ -109,11 +109,11 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 	}
 
 	handleUpdate() {
-		const { itemId, data, requestUpdateCard } = this.props;
+		const { itemId, data, requestUpdateTask } = this.props;
 		const inputEle = this.inputRef.current;
 		if (inputEle) {
 			const name = inputEle.value;
-			requestUpdateCard(
+			requestUpdateTask(
 				itemId,
 				{ ...data, name },
 				{ onSuccess: this.onRequestSuccess }
@@ -126,8 +126,8 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 
 	//FIXME delete 시  UI 가 바로 제거 되지 않음
 	handleDelete() {
-		const { itemId, requestDeleteCard } = this.props;
-		requestDeleteCard(itemId, {}, { onSuccess: this.onRequestSuccess });
+		const { itemId, requestDeleteTask } = this.props;
+		requestDeleteTask(itemId, {}, { onSuccess: this.onRequestSuccess });
 	}
 
 	render() {
@@ -162,7 +162,7 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 								variant="outlined"
 								size="small"
 								classes={{ root: classes.inputRoot }}
-								placeholder="Enter a title for this card..."
+								placeholder="Enter a title for this task..."
 								defaultValue={title}
 								inputRef={this.inputRef}
 								InputProps={{

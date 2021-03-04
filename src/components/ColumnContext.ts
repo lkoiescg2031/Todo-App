@@ -3,13 +3,13 @@ import React from "react";
 export interface ColumnContext {
 	updateColumnTitle: (newValue: string, prevValue: string) => void;
 	deleteColumn: () => void;
-	createCard: (title: string) => void;
+	createTask: (title: string) => void;
 }
 
 const Context = React.createContext<ColumnContext>({
 	updateColumnTitle: () => {},
 	deleteColumn: () => {},
-	createCard: () => {},
+	createTask: () => {},
 });
 
 export default Context;

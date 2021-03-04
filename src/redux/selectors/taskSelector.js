@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { FETCH, FETCH_LIST, resourceName } from "../actions/cardAction";
+import { FETCH, FETCH_LIST, resourceName } from "../actions/taskAction";
 
 export const resourceSelector = (state) => state[resourceName];
 export const entitiesSelector = (state) => resourceSelector(state).entities;

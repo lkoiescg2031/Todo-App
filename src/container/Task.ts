@@ -3,17 +3,17 @@ import { connect } from "react-redux";
 import Task from "../components/Task/Task";
 
 import {
-	updateItem as requestUpdateCard,
-	deleteItem as requestDeleteCard,
-} from "../redux/actions/cardAction";
+	updateItem as requestUpdateTask,
+	deleteItem as requestDeleteTask,
+} from "../redux/actions/taskAction";
 
 const mapStateToProps = (state: {}) => {
 	return {};
 };
 
 const mapDispatchToProps = {
-	requestUpdateCard,
-	requestDeleteCard,
+	requestUpdateTask,
+	requestDeleteTask,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Task);

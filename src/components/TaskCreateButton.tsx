@@ -18,7 +18,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 import ColumContext from "./ColumnContext";
 
-interface CardCreateButtonProps {
+interface TaskCreateButtonProps {
 	text: string;
 	classes: {
 		accordionRoot: string;
@@ -33,21 +33,21 @@ interface CardCreateButtonProps {
 	};
 }
 
-interface CardCreateButtonStates {
+interface TaskCreateButtonStates {
 	isExpanded: boolean;
 	isHover: boolean;
 	isDragged: boolean;
 }
 
-class CardCreateButton extends PureComponent<
-	CardCreateButtonProps,
-	CardCreateButtonStates
+class TaskCreateButton extends PureComponent<
+	TaskCreateButtonProps,
+	TaskCreateButtonStates
 > {
 	static contextType = ColumContext;
 
 	private inputRef: React.RefObject<HTMLTextAreaElement>;
 
-	constructor(props: CardCreateButtonProps) {
+	constructor(props: TaskCreateButtonProps) {
 		super(props);
 
 		this.inputRef = React.createRef<HTMLTextAreaElement>();
@@ -113,7 +113,7 @@ class CardCreateButton extends PureComponent<
 		const target = this.inputRef.current;
 
 		if (target && target.value !== "") {
-			this.context.createCard(target.value);
+			this.context.createTask(target.value);
 			target.value = "";
 		}
 	}
@@ -169,7 +169,7 @@ class CardCreateButton extends PureComponent<
 								},
 							}}
 							multiline
-							placeholder="Enter a title for this card..."
+							placeholder="Enter a title for this task..."
 						/>
 					</AccordionSummary>
 					<AccordionActions classes={{ root: classes.actionRoot }}>
@@ -232,4 +232,4 @@ export default withStyles((theme) => ({
 	hidden: {
 		display: "none",
 	},
-}))(CardCreateButton);
+}))(TaskCreateButton);

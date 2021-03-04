@@ -7,7 +7,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 
 import grey from "@material-ui/core/colors/grey";
 
-import CardCreateButton from "./CardCreateButton";
+import TaskCreateButton from "./TaskCreateButton";
 import ColumnMenuButton from "./ColumnMenuButton";
 import ColumnTitle from "./ColumnTitle";
 
@@ -48,10 +48,10 @@ class KanBanColumns extends PureComponent<KanBanColumnProp, KanBanColumnState> {
 			(child) => typeof child !== "boolean"
 		)[0];
 
-		const appendCardText =
+		const appendTaskTest =
 			Array.isArray(childNode) && childNode.length === 0
-				? "Add a card"
-				: "Add another card";
+				? "Add a task"
+				: "Add another task";
 
 		return (
 			<Card elevation={2} classes={{ root: classes.columns }}>
@@ -61,7 +61,7 @@ class KanBanColumns extends PureComponent<KanBanColumnProp, KanBanColumnState> {
 				/>
 				<div className={classes.works}>
 					{children}
-					<CardCreateButton text={appendCardText} />
+					<TaskCreateButton text={appendTaskTest} />
 				</div>
 			</Card>
 		);

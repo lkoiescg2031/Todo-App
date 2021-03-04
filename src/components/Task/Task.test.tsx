@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 
 import Task from "./Task";
 
-describe("<KanBanCard />", () => {
+describe("<Task />", () => {
 	it("snapshot test", () => {
 		const workName = "work1";
 		const utils = render(<Task title={workName} />);

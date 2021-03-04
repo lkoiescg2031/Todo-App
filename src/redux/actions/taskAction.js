@@ -1,6 +1,6 @@
 import api from "../apis/serverApi";
 
-const key = "card";
+const key = "task";
 
 export const resourceName = `/${key}`;
 

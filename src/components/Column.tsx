@@ -29,8 +29,8 @@ interface ColumnContainerProps extends ColumnProps {
 	requestColumnItem: (id: number, params?: {}, meta?: {}) => void;
 	requestUpdateColumn: (id: number, params?: {}, meta?: {}) => void;
 	requestDeleteColumn: (id: number, params?: {}, meta?: {}) => void;
-	requestCardItems: (params?: {}, meta?: {}) => void;
-	requestCreateCard: (card: {
+	requestFetchTasks: (params?: {}, meta?: {}) => void;
+	requestCreateTask: (task: {
 		name: string;
 		columnId: number;
 		boardId?: number;
@@ -38,14 +38,6 @@ interface ColumnContainerProps extends ColumnProps {
 }
 
 class Column extends PureComponent<ColumnContainerProps> {
-	static defaultProps = {
-		isFetch: false,
-		requestColumnItem: () => {},
-		requestUpdateColumn: () => {},
-		requestCardItems: () => {},
-		requestCreateCard: () => {},
-	};
-
 	constructor(props: ColumnContainerProps) {
 		super(props);
 
@@ -53,18 +45,18 @@ class Column extends PureComponent<ColumnContainerProps> {
 		this.handleRetrieveColumn = this.handleRetrieveColumn.bind(this);
 		this.handleUpdateColumnTitle = this.handleUpdateColumnTitle.bind(this);
 		this.handleDeleteColumn = this.handleDeleteColumn.bind(this);
-		this.handleCreateCard = this.handleCreateCard.bind(this);
+		this.handleCreateTask = this.handleCreateTask.bind(this);
 	}
 
 	handleRetrieveColumn() {
 		const { itemId, data, isFetch } = this.props;
 		const { boardId } = data || {};
-		const { requestColumnItem, requestCardItems } = this.props;
+		const { requestColumnItem, requestFetchTasks } = this.props;
 
 		if (typeof data === "undefined" && isFetch === false) {
 			requestColumnItem(itemId);
 		}
-		requestCardItems({ columnId: itemId, boardId });
+		requestFetchTasks({ columnId: itemId, boardId });
 	}
 
 	handleUpdateColumnTitle(newValue: string, prevValue: string) {
@@ -79,11 +71,11 @@ class Column extends PureComponent<ColumnContainerProps> {
 		this.forceUpdate();
 	}
 
-	handleCreateCard(name: string) {
-		const { itemId: columnId, data, requestCreateCard } = this.props;
+	handleCreateTask(name: string) {
+		const { itemId: columnId, data, requestCreateTask } = this.props;
 		const { boardId } = data || {};
 
-		requestCreateCard({ name, columnId, boardId });
+		requestCreateTask({ name, columnId, boardId });
 	}
 
 	componentDidMount() {
@@ -99,7 +91,7 @@ class Column extends PureComponent<ColumnContainerProps> {
 				value={{
 					updateColumnTitle: this.handleUpdateColumnTitle,
 					deleteColumn: this.handleDeleteColumn,
-					createCard: this.handleCreateCard,
+					createTask: this.handleCreateTask,
 				}}
 			>
 				<KanBanColumn name={name ?? ""}>
@@ -114,7 +106,7 @@ class Column extends PureComponent<ColumnContainerProps> {
 					{isFetch ||
 						tasks?.map((task, idx) => (
 							<Task
-								key={`card-${idx}-${itemId}`}
+								key={`task-${idx}-${itemId}`}
 								itemId={task.id}
 								data={task}
 							/>

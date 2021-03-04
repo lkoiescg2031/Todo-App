@@ -1,15 +1,15 @@
 import boardReducer from "./boardReducer";
 import columnReducer from "./columnReducer";
-import cardReducer from "./cardReducer";
+import taskReducer from "./taskReducer";
 
 import { resourceName as boardResourceName } from "../actions/boardAction";
 import { resourceName as columnResourceName } from "../actions/columnAction";
-import { resourceName as cardResourceName } from "../actions/cardAction";
+import { resourceName as taskResourceName } from "../actions/taskAction";
 
 const reducers = {
 	[boardResourceName]: boardReducer,
 	[columnResourceName]: columnReducer,
-	[cardResourceName]: cardReducer,
+	[taskResourceName]: taskReducer,
 };
 
 export default reducers;
