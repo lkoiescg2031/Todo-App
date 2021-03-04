@@ -30,6 +30,7 @@ interface ColumnProps {
 	tasks?: TaskItem[];
 	classes: {
 		columns: string;
+		taskScroll: string;
 		tasks: string;
 		skeleton: string;
 	};
@@ -49,10 +50,17 @@ interface ColumnContainerProps extends ColumnProps {
 }
 
 class Column extends PureComponent<ColumnContainerProps> {
+	private taskScrollRef: React.RefObject<HTMLDivElement>;
+	private tasksRef: React.RefObject<HTMLDivElement>;
+
 	constructor(props: ColumnContainerProps) {
 		super(props);
 
 		this.state = {};
+
+		this.taskScrollRef = React.createRef<HTMLDivElement>();
+		this.tasksRef = React.createRef<HTMLDivElement>();
+
 		this.handleRetrieveColumn = this.handleRetrieveColumn.bind(this);
 		this.handleUpdateColumnTitle = this.handleUpdateColumnTitle.bind(this);
 		this.handleDeleteColumn = this.handleDeleteColumn.bind(this);
@@ -115,16 +123,16 @@ class Column extends PureComponent<ColumnContainerProps> {
 						title={<ColumnTitle value={name} initialMode="text" />}
 						action={<ColumnMenuButton />}
 					/>
-					<div className={classes.tasks}>
-						{isLoading ? (
-							<div className={classes.skeleton}>
-								<Skeleton variant="rect" animation="wave" height={40} />
-								<Skeleton variant="rect" animation="wave" height={40} />
-								<Skeleton variant="rect" animation="wave" height={40} />
-								<Skeleton variant="rect" animation="wave" height={40} />
-							</div>
-						) : (
-							<>
+					{isLoading ? (
+						<div className={classes.skeleton}>
+							<Skeleton variant="rect" animation="wave" height={40} />
+							<Skeleton variant="rect" animation="wave" height={40} />
+							<Skeleton variant="rect" animation="wave" height={40} />
+							<Skeleton variant="rect" animation="wave" height={40} />
+						</div>
+					) : (
+						<div className={classes.taskScroll}>
+							<div className={classes.tasks}>
 								{tasks?.map((task, idx) => (
 									<Task
 										key={`task-${idx}-${itemId}`}
@@ -133,9 +141,9 @@ class Column extends PureComponent<ColumnContainerProps> {
 									/>
 								))}
 								<TaskCreateButton text={appendTaskTest} />
-							</>
-						)}
-					</div>
+							</div>
+						</div>
+					)}
 				</Card>
 			</ColumnContext.Provider>
 		);
@@ -146,11 +154,20 @@ export default withStyles((theme) => ({
 	columns: {
 		minWidth: Width,
 		height: "max-content",
+		maxHeight: "calc(100% - 120px)",
 		margin: `0px ${theme.spacing(1)}px`,
 		padding: theme.spacing(1),
 		background: grey[100],
+		overflowY: "auto",
+		display: "flex",
+		flexDirection: "column",
+	},
+	taskScroll: {
+		flexGrow: 1,
+		overflowY: "auto",
 	},
 	tasks: {
+		height: `max-content`,
 		"& > div": {
 			margin: `${theme.spacing(1)}px 0px`,
 		},

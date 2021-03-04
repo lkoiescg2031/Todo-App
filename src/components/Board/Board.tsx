@@ -116,12 +116,13 @@ export default withStyles((theme) => ({
 	boardWrapper: {
 		width: "100%",
 		height: "100%",
-		overflow: "auto",
+		overflowY: "auto",
 	},
 	board: {
 		width: "max-content",
+		height: `calc(100% - ${theme.spacing(2) * 2}px)`,
+		padding: `${theme.spacing(2)}px`,
 		display: "flex",
-		padding: `${theme.spacing(2)}px ${theme.spacing(1)}px`,
 	},
 	skeleton: {
 		display: "flex",

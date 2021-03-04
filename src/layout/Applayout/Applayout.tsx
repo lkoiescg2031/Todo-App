@@ -16,7 +16,6 @@ interface AppLayoutProps {
 	title: string;
 	children?: React.ReactNode;
 	classes: {
-		mainWrapper: string;
 		main: string;
 		title: string;
 	};
@@ -62,32 +61,34 @@ class AppLayout extends PureComponent<AppLayoutProps, AppLayoutState> {
 						</Typography>
 					</ToolBar>
 				</AppBar>
-				<div className={classes.mainWrapper}>
-					<ToolBar />
-					<main className={classes.main}>{children}</main>
-				</div>
+				<main className={classes.main}>{children}</main>
 			</Context.Provider>
 		);
 	}
 }
 
-export default withStyles((theme) => ({
-	mainWrapper: {
-		width: "100%",
-		height: "100%",
-		display: "flex",
-		flexDirection: "column",
-		overflow: "auto",
-	},
-	main: {
-		width: "100%",
-		height: "100%",
-		backgroundColor: teal[100],
-		flexGrow: 1,
-	},
-	title: {
-		overflow: "hidden",
-		whiteSpace: "nowrap",
-		textOverflow: "ellipsis",
-	},
-}))(AppLayout);
+export default withStyles(function (theme) {
+	const mediaSmUp = theme.breakpoints.up("sm");
+	const toolbar = theme.mixins.toolbar;
+	const smUpToolbar = toolbar[mediaSmUp] as { minHeight: string };
+
+	return {
+		main: {
+			width: "100%",
+			backgroundColor: teal[100],
+			overflowX: "auto",
+			overflowY: "hidden",
+			marginTop: toolbar.minHeight,
+			height: `calc(100% - ${toolbar.minHeight}px)`,
+			[theme.breakpoints.up("sm")]: {
+				marginTop: smUpToolbar.minHeight,
+				height: `calc(100% - ${smUpToolbar.minHeight}px)`,
+			},
+		},
+		title: {
+			overflow: "hidden",
+			whiteSpace: "nowrap",
+			textOverflow: "ellipsis",
+		},
+	};
+})(AppLayout);

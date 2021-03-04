@@ -38,6 +38,7 @@ interface ColumnCreateButtonState {
 }
 
 //FIXME enter 버튼 눌렀을 때 컬럼이 추가 되지 않음
+//FTXME board 에 칼럼이 추가될 떄 칼럼 전체가 다시 렌더링 되는 현상
 class CreateColumnButton extends PureComponent<
 	ColumnCreateButtonProps,
 	ColumnCreateButtonState

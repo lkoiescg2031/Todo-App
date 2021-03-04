@@ -27,6 +27,7 @@ interface TaskProps {
 		dialogContainer: string;
 		dialogPaper: string;
 		dialogContent: string;
+		dialogPaperScrollPaper: string;
 		inputWrapper: string;
 		textfieldRoot: string;
 		inputRoot: string;
@@ -46,6 +47,8 @@ interface TaskContainerProps extends TaskProps {
 interface TaskState {
 	isOpen: boolean;
 }
+
+// FIXME 모바일 화면에서의 다이얼로그 수정
 
 class Task extends PureComponent<TaskContainerProps, TaskState> {
 	private cardRef: React.RefObject<HTMLDivElement>;
@@ -147,6 +150,7 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 					classes={{
 						container: classes.dialogContainer,
 						paper: classes.dialogPaper,
+						paperScrollPaper: classes.dialogPaperScrollPaper,
 					}}
 					open={isOpen}
 					onClose={this.closeDialog}
@@ -220,6 +224,9 @@ export default withStyles((theme) => ({
 		"& > :not(:first-child)": {
 			marginLeft: `${theme.spacing(1)}px`,
 		},
+	},
+	dialogPaperScrollPaper: {
+		maxHeight: "none",
 	},
 	inputWrapper: {
 		display: "flex",
