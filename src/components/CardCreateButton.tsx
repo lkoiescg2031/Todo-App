@@ -35,6 +35,8 @@ interface CardCreateButtonProps {
 
 interface CardCreateButtonStates {
 	isExpanded: boolean;
+	isHover: boolean;
+	isDragged: boolean;
 }
 
 class CardCreateButton extends PureComponent<
@@ -49,11 +51,32 @@ class CardCreateButton extends PureComponent<
 		super(props);
 
 		this.inputRef = React.createRef<HTMLTextAreaElement>();
-		this.state = { isExpanded: false };
+		this.state = { isExpanded: false, isHover: false, isDragged: false };
 
+		this.onHover = this.onHover.bind(this);
+		this.onDragged = this.onDragged.bind(this);
 		this.expand = this.expand.bind(this);
 		this.shrink = this.shrink.bind(this);
+		this.checkShrink = this.checkShrink.bind(this);
 		this.onAddClicked = this.onAddClicked.bind(this);
+		this.onEnterDown = this.onEnterDown.bind(this);
+	}
+
+	onHover() {
+		this.setState((prevState) => ({
+			...prevState,
+			isHover: !prevState.isHover,
+		}));
+	}
+
+	onDragged() {
+		const { isHover } = this.state;
+		if (isHover) {
+			this.setState((prevState) => ({
+				...prevState,
+				isDragged: !prevState.isDragged,
+			}));
+		}
 	}
 
 	expand() {
@@ -64,23 +87,39 @@ class CardCreateButton extends PureComponent<
 				if (target) {
 					target.focus();
 				}
+				window.addEventListener("click", this.checkShrink);
+				window.addEventListener("keydown", this.onEnterDown);
 			}
 		);
 	}
 
 	shrink() {
 		this.setState(
-			(prevState) => ({ ...prevState, isExpanded: false }),
-			() => {}
+			(prevState) => ({ ...prevState, isExpanded: false, isDragged: false }),
+			() => {
+				window.removeEventListener("click", this.checkShrink);
+			}
 		);
+	}
+
+	checkShrink() {
+		const { isHover, isDragged } = this.state;
+		if (isHover === false && isDragged === false) {
+			this.shrink();
+		}
 	}
 
 	onAddClicked() {
 		const target = this.inputRef.current;
 
-		if (target) {
+		if (target && target.value !== "") {
 			this.context.createCard(target.value);
 			target.value = "";
+		}
+	}
+	onEnterDown(e: KeyboardEvent) {
+		if (e.key === "Enter") {
+			this.onAddClicked();
 		}
 	}
 
@@ -89,7 +128,12 @@ class CardCreateButton extends PureComponent<
 		const { isExpanded } = this.state;
 
 		return (
-			<div>
+			<div
+				onMouseEnter={this.onHover}
+				onMouseLeave={this.onHover}
+				onMouseDown={this.onDragged}
+				onMouseUp={this.onDragged}
+			>
 				<Accordion
 					onChange={this.expand}
 					classes={{ root: classes.accordionRoot }}
@@ -175,8 +219,10 @@ export default withStyles((theme) => ({
 	},
 	inputWrapper: {
 		width: "100%",
+		textAlign: "left",
 	},
 	inputRoot: {
+		minHeight: "120px",
 		backgroundColor: "#ffffff",
 		boxShadow: theme.shadows[1],
 	},

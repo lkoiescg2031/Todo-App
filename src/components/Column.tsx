@@ -4,7 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import KanBanColumn from "./KanBanColumn";
-import KanBanCard from "./KanBanCard";
+import Card from "../container/Card";
+import { CardItem } from "./Card";
 
 import ColumnContext from "./ColumnContext";
 
@@ -14,19 +15,17 @@ export interface ColumnItem {
 	boardId: number;
 }
 
-interface CardItem {
-	id: number;
-	name: string;
-	columnId: number;
-	boardId: number;
-}
-
 interface ColumnProps {
 	itemId: number;
-	boardId: number;
 	data?: ColumnItem;
-	isFetch: boolean;
 	cards?: CardItem[];
+	classes: {
+		skeleton: string;
+	};
+}
+
+interface ColumnContainerProps extends ColumnProps {
+	isFetch: boolean;
 	requestColumnItem: (id: number, params?: {}, meta?: {}) => void;
 	requestUpdateColumn: (id: number, params?: {}, meta?: {}) => void;
 	requestDeleteColumn: (id: number, params?: {}, meta?: {}) => void;
@@ -34,14 +33,11 @@ interface ColumnProps {
 	requestCreateCard: (card: {
 		name: string;
 		columnId: number;
-		boardId: number;
+		boardId?: number;
 	}) => void;
-	classes: {
-		skeleton: string;
-	};
 }
 
-class Column extends PureComponent<ColumnProps> {
+class Column extends PureComponent<ColumnContainerProps> {
 	static defaultProps = {
 		isFetch: false,
 		requestColumnItem: () => {},
@@ -50,7 +46,7 @@ class Column extends PureComponent<ColumnProps> {
 		requestCreateCard: () => {},
 	};
 
-	constructor(props: ColumnProps) {
+	constructor(props: ColumnContainerProps) {
 		super(props);
 
 		this.state = {};
@@ -61,7 +57,8 @@ class Column extends PureComponent<ColumnProps> {
 	}
 
 	handleRetrieveColumn() {
-		const { boardId, itemId, data, isFetch } = this.props;
+		const { itemId, data, isFetch } = this.props;
+		const { boardId } = data || {};
 		const { requestColumnItem, requestCardItems } = this.props;
 
 		if (typeof data === "undefined" && isFetch === false) {
@@ -83,7 +80,8 @@ class Column extends PureComponent<ColumnProps> {
 	}
 
 	handleCreateCard(name: string) {
-		const { itemId: columnId, boardId, requestCreateCard } = this.props;
+		const { itemId: columnId, data, requestCreateCard } = this.props;
+		const { boardId } = data || {};
 
 		requestCreateCard({ name, columnId, boardId });
 	}
@@ -114,8 +112,12 @@ class Column extends PureComponent<ColumnProps> {
 						</div>
 					)}
 					{isFetch ||
-						cards?.map(({ name }, idx) => (
-							<KanBanCard key={`card-${itemId}-${idx}`} title={name} />
+						cards?.map((card, idx) => (
+							<Card
+								key={`card-${itemId}-${idx}`}
+								itemId={card.id}
+								data={card}
+							/>
 						))}
 				</KanBanColumn>
 			</ColumnContext.Provider>

@@ -1,6 +1,12 @@
 import { handle } from "redux-pack";
 
-import { CREATE, FETCH, FETCH_LIST } from "../actions/cardAction";
+import {
+	CREATE,
+	FETCH,
+	FETCH_LIST,
+	UPDATE,
+	DELETE,
+} from "../actions/cardAction";
 
 const initialState = {
 	ids: [],
@@ -9,22 +15,28 @@ const initialState = {
 		[CREATE]: false,
 		[FETCH]: false,
 		[FETCH_LIST]: false,
+		[UPDATE]: false,
+		[DELETE]: false,
 	},
 	errorState: {
 		[CREATE]: false,
 		[FETCH]: false,
 		[FETCH_LIST]: false,
+		[UPDATE]: false,
+		[DELETE]: false,
 	},
 };
 
 const boardReducers = (state = initialState, action) => {
-	const { type, payload } = action;
+	const { type, payload, meta } = action;
 	// const { resourceName, key } = meta || {};
 
 	switch (type) {
 		case CREATE:
 		case FETCH:
 		case FETCH_LIST:
+		case UPDATE:
+		case DELETE:
 			return handle(state, action, {
 				start: (prevState) => ({
 					...prevState,
@@ -73,8 +85,20 @@ const boardReducers = (state = initialState, action) => {
 								ids: ids,
 								entities: { ...prevState.entities, ...entities },
 							};
+						} else if (type === DELETE) {
+							const { itemId } = meta;
+							const ids = prevState.ids.filter((id) => id !== itemId);
+							const entities = ids.reduce(
+								(fianl, id) => ({
+									...fianl,
+									[id]: prevState.entities[id],
+								}),
+								{}
+							);
+
+							return { ids, entities };
 						} else {
-							// FETCH
+							// CRAETE, FETCH, UPDATE
 							const { id } = data;
 
 							return {

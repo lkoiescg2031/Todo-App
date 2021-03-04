@@ -80,7 +80,7 @@ class Board extends PureComponent<BoardProps> {
 	}
 
 	render() {
-		const { classes, isFetch, itemId, columns } = this.props;
+		const { classes, isFetch, columns } = this.props;
 
 		return (
 			<BoardContext.Provider value={{ createColumn: this.handleAddColumn }}>
@@ -96,11 +96,7 @@ class Board extends PureComponent<BoardProps> {
 				{isFetch || (
 					<KanBanBoard>
 						{columns.map((column, key) => (
-							<Column
-								key={`columnId-${key}`}
-								boardId={itemId}
-								itemId={column.id}
-							/>
+							<Column key={`columnId-${key}`} itemId={column.id} />
 						))}
 					</KanBanBoard>
 				)}

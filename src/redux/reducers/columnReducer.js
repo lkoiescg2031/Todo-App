@@ -65,7 +65,14 @@ const boardReducers = (state = initialState, action) => {
 				success: (prevState) => {
 					const { ids, entities } = (({ data }) => {
 						if (type === FETCH_LIST) {
-							const ids = data.map((entity) => entity["id"]);
+							const ids = data
+								.map((entity) => entity["id"])
+								.reduce((finalIDs, id) => {
+									if (finalIDs.includes(id) === false) {
+										finalIDs.push(id);
+									}
+									return finalIDs;
+								}, prevState.ids);
 							const entities = data.reduce(
 								(final, entity) => ({
 									...final,
@@ -74,7 +81,10 @@ const boardReducers = (state = initialState, action) => {
 								{}
 							);
 
-							return { ids, entities };
+							return {
+								ids: ids,
+								entities: { ...prevState.entities, ...entities },
+							};
 						} else if (type === DELETE) {
 							const { itemId } = meta;
 							const ids = prevState.ids.filter((id) => id !== itemId);
