@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { KeyboardEvent, PureComponent } from "react";
 
 import { DragElementWrapper, DragPreviewOptions } from "react-dnd";
 
@@ -12,6 +12,9 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+
+import ColumnButtonList from "../../container/ColumnButtonList";
+import { ColumnItem } from "../Column/Column";
 
 export interface TaskItem {
 	id: number;
@@ -50,6 +53,8 @@ interface TaskStylesProps extends DraggableTaskProps {
 		textfieldRoot: string;
 		inputRoot: string;
 		saveButton: string;
+		menuWrapper: string;
+		deleteButton: string;
 	};
 }
 
@@ -77,6 +82,7 @@ class Task extends PureComponent<TaskStylesProps, TaskState> {
 		this.closeDialog = this.closeDialog.bind(this);
 		this.setupPosition = this.setupPosition.bind(this);
 		this.handleUpdate = this.handleUpdate.bind(this);
+		this.handleUpdateColumnId = this.handleUpdateColumnId.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
 		this.onRequestSuccess = this.onRequestSuccess.bind(this);
 	}
@@ -114,12 +120,20 @@ class Task extends PureComponent<TaskStylesProps, TaskState> {
 	handleUpdate() {
 		const { itemId, data, requestUpdateTask } = this.props;
 		const inputEle = this.inputRef.current;
+
 		if (inputEle) {
 			const name = inputEle.value;
 			requestUpdateTask(itemId, { ...data, name });
 			this.closeDialog();
 		}
 	}
+
+	handleUpdateColumnId({ id: columnId }: ColumnItem) {
+		const { itemId, data, requestUpdateTask } = this.props;
+		requestUpdateTask(itemId, { ...data, columnId });
+		this.closeDialog();
+	}
+
 	onRequestSuccess() {
 		this.closeDialog();
 	}
@@ -132,7 +146,7 @@ class Task extends PureComponent<TaskStylesProps, TaskState> {
 
 	render() {
 		const { data, dragPreviewRef, classes } = this.props;
-		const { name: title } = data || {};
+		const { name: title, columnId } = data || {};
 		const { isOpen } = this.state;
 
 		return (
@@ -186,14 +200,20 @@ class Task extends PureComponent<TaskStylesProps, TaskState> {
 								Save
 							</Button>
 						</div>
-						<div>
+						<div className={classes.menuWrapper}>
 							<Button
 								variant="contained"
 								disableElevation
+								classes={{ root: classes.deleteButton }}
 								onClick={this.handleDelete}
 							>
 								Delete
 							</Button>
+							<ColumnButtonList
+								classes={{ root: classes.deleteButton }}
+								columnId={columnId}
+								onColumnSelected={this.handleUpdateColumnId}
+							/>
 						</div>
 					</div>
 				</Dialog>
@@ -240,7 +260,7 @@ export default withStyles((theme) => ({
 		display: "flex",
 		flexDirection: "column",
 		"& > :not(:first-child)": {
-			marginTop: `${theme.spacing(1)}px`,
+			marginTop: theme.spacing(1),
 		},
 	},
 	textfieldRoot: {
@@ -252,5 +272,22 @@ export default withStyles((theme) => ({
 	saveButton: {
 		marginLeft: "auto",
 		textTransform: "none",
+	},
+	menuWrapper: {
+		display: "flex",
+		flexDirection: "column-reverse",
+		[theme.breakpoints.up("sm")]: {
+			flexDirection: "column",
+		},
+		"& > :not(:first-child)": {
+			marginBottom: theme.spacing(1),
+			[theme.breakpoints.up("sm")]: {
+				marginBottom: 0,
+				marginTop: theme.spacing(1),
+			},
+		},
+	},
+	deleteButton: {
+		width: "max-content",
 	},
 }))(Task);
