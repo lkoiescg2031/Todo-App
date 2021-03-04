@@ -152,7 +152,8 @@ class Column extends PureComponent<ColumnContainerProps> {
 
 export default withStyles((theme) => ({
 	columns: {
-		minWidth: Width,
+		width: Width,
+
 		height: "max-content",
 		maxHeight: "calc(100% - 120px)",
 		margin: `0px ${theme.spacing(1)}px`,

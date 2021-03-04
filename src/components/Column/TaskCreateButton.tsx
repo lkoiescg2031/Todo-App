@@ -59,7 +59,6 @@ class TaskCreateButton extends PureComponent<
 		this.shrink = this.shrink.bind(this);
 		this.checkShrink = this.checkShrink.bind(this);
 		this.onAddClicked = this.onAddClicked.bind(this);
-		this.onEnterDown = this.onEnterDown.bind(this);
 	}
 
 	onHover() {
@@ -88,7 +87,6 @@ class TaskCreateButton extends PureComponent<
 					target.focus();
 				}
 				window.addEventListener("click", this.checkShrink);
-				window.addEventListener("keydown", this.onEnterDown);
 			}
 		);
 	}
@@ -115,11 +113,6 @@ class TaskCreateButton extends PureComponent<
 		if (target && target.value !== "") {
 			this.context.createTask(target.value);
 			target.value = "";
-		}
-	}
-	onEnterDown(e: KeyboardEvent) {
-		if (e.key === "Enter") {
-			this.onAddClicked();
 		}
 	}
 

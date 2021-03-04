@@ -78,6 +78,11 @@ class EditableText extends PureComponent<EditableTextProps, EditableTextState> {
 
 		const newValue = value.length === 0 ? prevValue : value;
 
+		if (newValue.length > 14) {
+			alert("길이가 14자를 넘을 수 없습니다.");
+			return;
+		}
+
 		updateColumnTitle(newValue, prevValue);
 
 		this.setState(

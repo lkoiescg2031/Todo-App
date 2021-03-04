@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, PureComponent } from "react";
+import React, { PureComponent } from "react";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -24,6 +24,7 @@ interface TaskProps {
 	classes: {
 		root: string;
 		actionArea: string;
+		titleInner: string;
 		dialogContainer: string;
 		dialogPaper: string;
 		dialogContent: string;
@@ -70,7 +71,6 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 		this.handleUpdate = this.handleUpdate.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
 		this.onRequestSuccess = this.onRequestSuccess.bind(this);
-		this.onEnterPressed = this.onEnterPressed.bind(this);
 	}
 
 	openDialog() {
@@ -100,12 +100,6 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 			textFieldEle.style.width = `${width}px`;
 			inputEle.style.minHeight = `${Math.max(height, 80)}px`;
 			inputEle.focus();
-		}
-	}
-
-	onEnterPressed(e: KeyboardEvent) {
-		if (e.key === "Enter") {
-			this.handleUpdate();
 		}
 	}
 
@@ -142,7 +136,9 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 					classes={{ root: classes.actionArea }}
 					onClick={this.openDialog}
 				>
-					<Typography variant="body1">{title}</Typography>
+					<Typography variant="body1">
+						<pre className={classes.titleInner}>{title}</pre>
+					</Typography>
 				</CardActionArea>
 				<Dialog
 					classes={{
@@ -153,7 +149,6 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 					open={isOpen}
 					onClose={this.closeDialog}
 					onEntering={this.setupPosition}
-					onKeyDown={this.onEnterPressed}
 					innerRef={this.dialogInnerRef}
 				>
 					<div className={classes.dialogContent}>
@@ -166,6 +161,7 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 								classes={{ root: classes.inputRoot }}
 								placeholder="Enter a title for this task..."
 								defaultValue={title}
+								multiline
 								inputRef={this.inputRef}
 								InputProps={{
 									classes: {
@@ -202,6 +198,9 @@ class Task extends PureComponent<TaskContainerProps, TaskState> {
 export default withStyles((theme) => ({
 	root: {
 		position: "relative",
+	},
+	titleInner: {
+		margin: 0,
 	},
 	actionArea: {
 		padding: theme.spacing(1),

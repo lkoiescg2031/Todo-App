@@ -125,13 +125,17 @@ class CreateColumnButton extends PureComponent<
 		const target = this.inputRef.current;
 		const { createColumn } = this.context;
 
-		if (target && target.value !== "") {
-			// 아이템 추가 이벤트 발생
-			createColumn(target.value);
+		if (target) {
+			if (target.value.length > 14) {
+				alert("길이가 14를 넘을 수 없습니다.");
+			} else if (target.value.length !== 0) {
+				// 아이템 추가 이벤트 발생
+				createColumn(target.value);
 
-			// 아이템 추가
-			target.value = "";
-			target.focus();
+				// 아이템 추가
+				target.value = "";
+				target.focus();
+			}
 		}
 	}
 
@@ -170,15 +174,15 @@ class CreateColumnButton extends PureComponent<
 							{text}
 						</div>
 						<TextField
-							inputRef={this.inputRef}
+							variant="outlined"
+							size="small"
+							placeholder="Enter list title..."
 							classes={{
 								root: clsx(classes.inputRoot, {
 									[classes.hidden]: !isExpanded,
 								}),
 							}}
-							placeholder="Enter list title..."
-							variant="outlined"
-							size="small"
+							inputRef={this.inputRef}
 						/>
 					</AccordionSummary>
 					<AccordionActions>
