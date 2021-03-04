@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, PureComponent } from "react";
+import React, { PureComponent } from "react";
 
 import { DragElementWrapper, DragPreviewOptions } from "react-dnd";
 
