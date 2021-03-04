@@ -15,7 +15,7 @@ import TextField from "@material-ui/core/TextField";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 
-import { Width } from "../Column/KanBanColumn";
+import { Width } from "../Column/Column";
 import BoardContext from "./BoardContext";
 
 interface ColumnCreateButtonProps {

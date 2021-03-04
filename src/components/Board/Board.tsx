@@ -12,7 +12,7 @@ import BoardContext from "./BoardContext";
 
 //add defs
 import { ColumnItem } from "../Column/Column";
-import { Width } from "../Column/KanBanColumn";
+import { Width } from "../Column/Column";
 
 export interface BoardItem {
 	id: number;

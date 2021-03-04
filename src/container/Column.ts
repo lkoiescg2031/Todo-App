@@ -27,7 +27,7 @@ const mapStateToProps = (state: {}, props: { itemId: number }) => {
 	const { itemId } = props;
 	return {
 		data: columnSelector(state, itemId),
-		isFetch: isColumFetchState(state) || isTasksFetchState(state),
+		isLoading: isColumFetchState(state) || isTasksFetchState(state),
 		tasks: taskSelector(state).filter(
 			(entity: { columnId: number }) => entity.columnId === itemId
 		),
