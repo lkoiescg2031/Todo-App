@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import Column from "../components/Column";
+import Column from "../components/Column/Column";
 
 import {
 	entitySelector as columnSelector,

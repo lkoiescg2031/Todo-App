@@ -7,9 +7,9 @@ import CardHeader from "@material-ui/core/CardHeader";
 
 import grey from "@material-ui/core/colors/grey";
 
-import TaskCreateButton from "./TaskCreateButton";
-import ColumnMenuButton from "./ColumnMenuButton";
-import ColumnTitle from "./ColumnTitle";
+import TaskCreateButton from "../Column/TaskCreateButton";
+import ColumnMenuButton from "../Column/ColumnMenuButton";
+import ColumnTitle from "../Column/ColumnTitle";
 
 interface KanBanColumnProp {
 	name: string;

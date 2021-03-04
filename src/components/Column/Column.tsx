@@ -4,8 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import KanBanColumn from "./KanBanColumn";
-import Task from "../container/Task";
-import { TaskItem } from "./Task/Task";
+import Task from "../../container/Task";
+import { TaskItem } from "../Task/Task";
 
 import ColumnContext from "./ColumnContext";
 

@@ -11,8 +11,8 @@ import Column from "../container/Column";
 import BoardContext from "./BoardContext";
 
 //add defs
-import { ColumnItem } from "./Column";
-import { Width } from "./KanBanColumn";
+import { ColumnItem } from "./Column/Column";
+import { Width } from "./Column/KanBanColumn";
 
 interface BoardItem {
 	id: number;

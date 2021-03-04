@@ -1,8 +1,8 @@
 import React from "react";
 import { render } from "@testing-library/react";
 
-import KanBanColumn from "./KanBanColumn";
-import Task from "./Task/Task";
+import KanBanColumn from "../KanBanColumn";
+import Task from "../Task/Task";
 
 describe("<KanBanColumn />", () => {
 	it("snapshot test", () => {

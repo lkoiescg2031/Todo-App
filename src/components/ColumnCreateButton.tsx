@@ -15,10 +15,10 @@ import TextField from "@material-ui/core/TextField";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 
-import { Width } from "./KanBanColumn";
+import { Width } from "./Column/KanBanColumn";
 import BoardContext from "./BoardContext";
 
-interface AddColumnProps {
+interface ColumnCreateButtonProps {
 	text: string;
 	classes: {
 		wrapper: string;
@@ -31,18 +31,21 @@ interface AddColumnProps {
 	};
 }
 
-interface AddColumnState {
+interface ColumnCreateButtonState {
 	isHover: boolean;
 	isDragged: boolean;
 	isExpanded: boolean;
 }
-
-class AddColumn extends PureComponent<AddColumnProps, AddColumnState> {
+//FIXME enter 버튼 눌렀을 때 컬럼이 추가 되지 않음
+class CreateColumnButton extends PureComponent<
+	ColumnCreateButtonProps,
+	ColumnCreateButtonState
+> {
 	static contextType = BoardContext;
 
 	private inputRef: React.RefObject<HTMLInputElement>;
 
-	constructor(props: AddColumnProps) {
+	constructor(props: ColumnCreateButtonProps) {
 		super(props);
 
 		this.inputRef = React.createRef();
@@ -222,4 +225,4 @@ export default withStyles((theme) => ({
 	hidden: {
 		display: "none",
 	},
-}))(AddColumn);
+}))(CreateColumnButton);
