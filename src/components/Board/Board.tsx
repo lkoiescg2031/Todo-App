@@ -4,46 +4,42 @@ import { withStyles } from "@material-ui/core/styles";
 
 import Skeleton from "@material-ui/lab/Skeleton";
 
-import AppLayoutContext from "../layout/Applayout/Context";
+import AppLayoutContext from "../../layout/Applayout/Context";
 
 import KanBanBoard from "./KanBanBoard";
-import Column from "../container/Column";
+import Column from "../../container/Column";
 import BoardContext from "./BoardContext";
 
 //add defs
-import { ColumnItem } from "./Column/Column";
-import { Width } from "./Column/KanBanColumn";
+import { ColumnItem } from "../Column/Column";
+import { Width } from "../Column/KanBanColumn";
 
-interface BoardItem {
+export interface BoardItem {
 	id: number;
 	name: string;
 	desc: string;
 }
 
-export interface BoardProps {
+interface BoardProps {
 	itemId: number;
 	data?: BoardItem;
-	isFetch: boolean;
 	columns: ColumnItem[];
-	requestBoardItem: (id: number, params?: {}, meta?: {}) => void;
-	requestColumnItems: (params?: {}, meta?: {}) => void;
-	requestCreateColumn: (params?: {}, meta?: {}) => void;
 	classes: {
 		skeleton: string;
 	};
 }
 
-class Board extends PureComponent<BoardProps> {
-	static defaultProps = {
-		isFetch: false,
-		requestBoardItem: () => {},
-		requestColumnItems: () => {},
-		requestCreateColumn: () => {},
-	};
+interface BoardContainerProps extends BoardProps {
+	isFetch: boolean;
+	requestBoardItem: (id: number, params?: {}, meta?: {}) => void;
+	requestColumnItems: (params?: {}, meta?: {}) => void;
+	requestCreateColumn: (params?: {}, meta?: {}) => void;
+}
 
+class Board extends PureComponent<BoardContainerProps> {
 	static contextType = AppLayoutContext;
 
-	constructor(props: BoardProps) {
+	constructor(props: BoardContainerProps) {
 		super(props);
 
 		this.state = {};

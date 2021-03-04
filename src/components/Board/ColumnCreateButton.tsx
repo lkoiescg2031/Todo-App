@@ -15,7 +15,7 @@ import TextField from "@material-ui/core/TextField";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 
-import { Width } from "./Column/KanBanColumn";
+import { Width } from "../Column/KanBanColumn";
 import BoardContext from "./BoardContext";
 
 interface ColumnCreateButtonProps {
@@ -36,6 +36,7 @@ interface ColumnCreateButtonState {
 	isDragged: boolean;
 	isExpanded: boolean;
 }
+
 //FIXME enter 버튼 눌렀을 때 컬럼이 추가 되지 않음
 class CreateColumnButton extends PureComponent<
 	ColumnCreateButtonProps,
