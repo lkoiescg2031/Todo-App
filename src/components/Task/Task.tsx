@@ -48,8 +48,6 @@ interface TaskState {
 	isOpen: boolean;
 }
 
-// FIXME 모바일 화면에서의 다이얼로그 수정
-
 class Task extends PureComponent<TaskContainerProps, TaskState> {
 	private cardRef: React.RefObject<HTMLDivElement>;
 	private dialogInnerRef: React.RefObject<HTMLDivElement>;
@@ -221,8 +219,15 @@ export default withStyles((theme) => ({
 	},
 	dialogContent: {
 		display: "flex",
+		flexDirection: "column-reverse",
 		"& > :not(:first-child)": {
-			marginLeft: `${theme.spacing(1)}px`,
+			marginBottom: theme.spacing(1),
+			[theme.breakpoints.up("sm")]: {
+				marginLeft: theme.spacing(1),
+			},
+		},
+		[theme.breakpoints.up("sm")]: {
+			flexDirection: "row",
 		},
 	},
 	dialogPaperScrollPaper: {

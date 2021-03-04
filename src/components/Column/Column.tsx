@@ -140,8 +140,8 @@ class Column extends PureComponent<ColumnContainerProps> {
 										data={task}
 									/>
 								))}
-								<TaskCreateButton text={appendTaskTest} />
 							</div>
+							<TaskCreateButton text={appendTaskTest} />
 						</div>
 					)}
 				</Card>
@@ -167,6 +167,7 @@ export default withStyles((theme) => ({
 		overflowY: "auto",
 	},
 	tasks: {
+		minHeight: "60px",
 		height: `max-content`,
 		"& > div": {
 			margin: `${theme.spacing(1)}px 0px`,
