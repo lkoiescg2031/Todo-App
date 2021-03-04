@@ -2,38 +2,38 @@ import React from "react";
 
 import { render } from "@testing-library/react";
 
-import EditableText from "./ColumnTitle";
+import ColumnTitle from "./ColumnTitle";
 import { Mouse } from "@material-ui/icons";
 
 describe("<EditableText />", () => {
 	it("snapshot test in text mode", () => {
-		const utils = render(<EditableText value="text mode" initialMode="text" />);
+		const utils = render(<ColumnTitle value="text mode" initialMode="text" />);
 
 		expect(utils.container).toMatchSnapshot();
 	});
 
 	it("snapshot test in input mode", () => {
 		const utils = render(
-			<EditableText value="input mode" initialMode="input" />
+			<ColumnTitle value="input mode" initialMode="input" />
 		);
 		expect(utils.container).toMatchSnapshot();
 	});
 
 	it("props render test in text mode", () => {
 		const value = "text mode";
-		const utils = render(<EditableText value={value} initialMode="text" />);
+		const utils = render(<ColumnTitle value={value} initialMode="text" />);
 		utils.getByText(value);
 	});
 
 	it("props render test in input mode", () => {
 		const value = "input mode";
-		const utils = render(<EditableText value={value} initialMode="input" />);
+		const utils = render(<ColumnTitle value={value} initialMode="input" />);
 		utils.getByDisplayValue(value);
 	});
 
 	it("changed mode from text to input by click", () => {
 		const value = "text mode";
-		const utils = render(<EditableText value={value} />);
+		const utils = render(<ColumnTitle value={value} />);
 
 		const text = utils.getByText(value);
 		text.click();

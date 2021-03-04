@@ -2,7 +2,7 @@ import React from "react";
 
 export interface ColumnContext {
 	updateColumnTitle: (newValue: string, prevValue: string) => void;
-	deleteColumn: () => void;
+	deleteColumn: (columnId: number) => void;
 	createTask: (title: string) => void;
 }
 

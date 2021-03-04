@@ -86,11 +86,10 @@ class Column extends PureComponent<ColumnStylesProps> {
 		requestUpdateColumn(itemId, { ...data, name: newValue });
 	}
 
-	handleDeleteColumn() {
+	handleDeleteColumn(columnId: number) {
 		const { itemId, requestDeleteColumn } = this.props;
 
 		requestDeleteColumn(itemId);
-		this.forceUpdate();
 	}
 
 	handleCreateTask(name: string) {

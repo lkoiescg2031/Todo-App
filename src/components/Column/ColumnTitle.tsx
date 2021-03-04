@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 
 import ColumnContext from "./ColumnContext";
 
-interface EditableTextProps {
+interface ColumnTitleProps {
 	value?: string;
 	initialMode?: "text" | "input";
 	classes: {
@@ -13,7 +13,7 @@ interface EditableTextProps {
 	};
 }
 
-interface EditableTextState {
+interface ColumnTitleState {
 	isEditDragged: boolean;
 	isEditHover: boolean;
 	isEdit: boolean;
@@ -21,10 +21,10 @@ interface EditableTextState {
 	prevValue: string;
 }
 
-class EditableText extends PureComponent<EditableTextProps, EditableTextState> {
+class ColumnTitle extends PureComponent<ColumnTitleProps, ColumnTitleState> {
 	static contextType = ColumnContext;
 
-	constructor(props: EditableTextProps) {
+	constructor(props: ColumnTitleProps) {
 		super(props);
 
 		this.state = {
@@ -116,6 +116,16 @@ class EditableText extends PureComponent<EditableTextProps, EditableTextState> {
 		}
 	}
 
+	componentDidUpdate(prevProps: ColumnTitleProps) {
+		if (prevProps.value !== this.props.value) {
+			this.setState((prevState) => ({
+				...prevState,
+				value: this.props.value,
+				prevValue: this.props.value,
+			}));
+		}
+	}
+
 	render() {
 		const { classes } = this.props;
 		const { isEdit, value, prevValue } = this.state;
@@ -156,4 +166,4 @@ export default withStyles((theme) => ({
 		width: "100%",
 		cursor: "pointer",
 	},
-}))(EditableText);
+}))(ColumnTitle);

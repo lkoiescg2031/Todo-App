@@ -31,12 +31,15 @@ class ColumnMenuButton extends PureComponent<
 	ColumnMenuButtonProps,
 	ColumnMenuButtonStates
 > {
+	static contextType = ColumnContext;
+
 	constructor(props: ColumnMenuButtonProps) {
 		super(props);
 
 		this.state = { anchorEl: null };
 		this.openMenu = this.openMenu.bind(this);
 		this.closeMenu = this.closeMenu.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
 	}
 
 	openMenu({ currentTarget }: MouseEvent<HTMLElement>) {
@@ -53,52 +56,54 @@ class ColumnMenuButton extends PureComponent<
 		}));
 	}
 
+	handleDelete() {
+		const { deleteColumn } = this.context;
+		deleteColumn();
+		this.closeMenu();
+	}
+
 	render() {
 		const { classes } = this.props;
 		const { anchorEl } = this.state;
 
 		return (
-			<ColumnContext.Consumer>
-				{({ deleteColumn }) => (
-					<div>
+			<div>
+				<IconButton
+					aria-label="more"
+					aria-controls="column-menu"
+					aria-haspopup="true"
+					onClick={this.openMenu}
+				>
+					<MoreVertIcon />
+				</IconButton>
+				<Menu
+					id="column-menu"
+					anchorEl={anchorEl}
+					keepMounted
+					open={Boolean(anchorEl)}
+					onClose={this.closeMenu}
+				>
+					<div className={classes.titleWrapper}>
+						<Typography variant="body1">List Actions</Typography>
 						<IconButton
-							aria-label="more"
-							aria-controls="column-menu"
-							aria-haspopup="true"
-							onClick={this.openMenu}
+							classes={{ root: classes.closeButton }}
+							size="small"
+							onClick={this.closeMenu}
 						>
-							<MoreVertIcon />
+							<CloseIcon />
 						</IconButton>
-						<Menu
-							id="column-menu"
-							anchorEl={anchorEl}
-							keepMounted
-							open={Boolean(anchorEl)}
-							onClose={this.closeMenu}
-						>
-							<div className={classes.titleWrapper}>
-								<Typography variant="body1">List Actions</Typography>
-								<IconButton
-									classes={{ root: classes.closeButton }}
-									size="small"
-									onClick={this.closeMenu}
-								>
-									<CloseIcon />
-								</IconButton>
-							</div>
-							<Divider variant="middle" />
-
-							<MenuItem
-								classes={{ root: classes.menuItemRoot }}
-								key="delete-list"
-								onClick={deleteColumn}
-							>
-								Delete list
-							</MenuItem>
-						</Menu>
 					</div>
-				)}
-			</ColumnContext.Consumer>
+					<Divider variant="middle" />
+
+					<MenuItem
+						classes={{ root: classes.menuItemRoot }}
+						key="delete-list"
+						onClick={this.handleDelete}
+					>
+						Delete list
+					</MenuItem>
+				</Menu>
+			</div>
 		);
 	}
 }
