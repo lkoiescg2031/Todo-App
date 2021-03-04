@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 
 import KanBanColumn from "./KanBanColumn";
-import Card from "./Card";
+import Task from "./Task/Task";
 
 describe("<KanBanColumn />", () => {
 	it("snapshot test", () => {
@@ -11,7 +11,7 @@ describe("<KanBanColumn />", () => {
 		const utils = render(
 			<KanBanColumn name={columnName}>
 				{cardNames.map((name, idx) => (
-					<Card key={`work-${idx}`} title={name} />
+					<Task key={`work-${idx}`} title={name} />
 				))}
 			</KanBanColumn>
 		);
@@ -37,7 +37,7 @@ describe("<KanBanColumn />", () => {
 		const appendButtonName = "Add another card";
 		const utils = render(
 			<KanBanColumn name="Test">
-				<Card title="Work 1" />
+				<Task title="Work 1" />
 			</KanBanColumn>
 		);
 

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import Card from "../components/Card";
+import Task from "../components/Task/Task";
 
 import {
 	updateItem as requestUpdateCard,
@@ -16,4 +16,4 @@ const mapDispatchToProps = {
 	requestDeleteCard,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default connect(mapStateToProps, mapDispatchToProps)(Task);

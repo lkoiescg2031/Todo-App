@@ -7,8 +7,8 @@ import {
 	fetchLoadingStateSelector as isColumFetchState,
 } from "../redux/selectors/columnSelector";
 import {
-	collectionSelector as cardsSelector,
-	fetchListLoadingStateSelector as isCardsFetchState,
+	collectionSelector as taskSelector,
+	fetchListLoadingStateSelector as isTasksFetchState,
 } from "../redux/selectors/cardSelector";
 
 import {
@@ -27,8 +27,8 @@ const mapStateToProps = (state: {}, props: { itemId: number }) => {
 	const { itemId } = props;
 	return {
 		data: columnSelector(state, itemId),
-		isFetch: isColumFetchState(state) || isCardsFetchState(state),
-		cards: cardsSelector(state).filter(
+		isFetch: isColumFetchState(state) || isTasksFetchState(state),
+		tasks: taskSelector(state).filter(
 			(entity: { columnId: number }) => entity.columnId === itemId
 		),
 	};

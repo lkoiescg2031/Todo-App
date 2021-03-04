@@ -4,8 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
 
 import KanBanColumn from "./KanBanColumn";
-import Card from "../container/Card";
-import { CardItem } from "./Card";
+import Task from "../container/Task";
+import { TaskItem } from "./Task/Task";
 
 import ColumnContext from "./ColumnContext";
 
@@ -18,7 +18,7 @@ export interface ColumnItem {
 interface ColumnProps {
 	itemId: number;
 	data?: ColumnItem;
-	cards?: CardItem[];
+	tasks?: TaskItem[];
 	classes: {
 		skeleton: string;
 	};
@@ -91,7 +91,7 @@ class Column extends PureComponent<ColumnContainerProps> {
 	}
 
 	render() {
-		const { classes, itemId, data, cards, isFetch } = this.props;
+		const { classes, itemId, data, tasks, isFetch } = this.props;
 		const { name } = data || {};
 
 		return (
@@ -112,11 +112,11 @@ class Column extends PureComponent<ColumnContainerProps> {
 						</div>
 					)}
 					{isFetch ||
-						cards?.map((card, idx) => (
-							<Card
-								key={`card-${itemId}-${idx}`}
-								itemId={card.id}
-								data={card}
+						tasks?.map((task, idx) => (
+							<Task
+								key={`card-${idx}-${itemId}`}
+								itemId={task.id}
+								data={task}
 							/>
 						))}
 				</KanBanColumn>

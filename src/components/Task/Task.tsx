@@ -4,23 +4,23 @@ import { withStyles } from "@material-ui/core/styles";
 
 import Dialog from "@material-ui/core/Dialog";
 
-import MaterialCard from "@material-ui/core/Card";
+import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-export interface CardItem {
+export interface TaskItem {
 	id: number;
 	name: string;
 	columnId: number;
 	boardId: number;
 }
 
-interface CardProps {
+interface TaskProps {
 	itemId: number;
-	data?: CardItem;
+	data?: TaskItem;
 	classes: {
 		root: string;
 		actionArea: string;
@@ -34,7 +34,7 @@ interface CardProps {
 	};
 }
 
-interface CardContainerProps extends CardProps {
+interface TaskContainerProps extends TaskProps {
 	requestDeleteCard: (id: number, params?: {}, meta?: {}) => void;
 	requestUpdateCard: (
 		id: number,
@@ -43,17 +43,17 @@ interface CardContainerProps extends CardProps {
 	) => void;
 }
 
-interface CardState {
+interface TaskState {
 	isOpen: boolean;
 }
 
-class Card extends PureComponent<CardContainerProps, CardState> {
+class Task extends PureComponent<TaskContainerProps, TaskState> {
 	private cardRef: React.RefObject<HTMLDivElement>;
 	private dialogInnerRef: React.RefObject<HTMLDivElement>;
 	private textFieldRef: React.RefObject<HTMLDivElement>;
 	private inputRef: React.RefObject<HTMLInputElement>;
 
-	constructor(props: CardContainerProps) {
+	constructor(props: TaskContainerProps) {
 		super(props);
 
 		this.state = { isOpen: false };
@@ -123,6 +123,7 @@ class Card extends PureComponent<CardContainerProps, CardState> {
 	onRequestSuccess() {
 		this.closeDialog();
 	}
+
 	//FIXME delete 시  UI 가 바로 제거 되지 않음
 	handleDelete() {
 		const { itemId, requestDeleteCard } = this.props;
@@ -135,7 +136,7 @@ class Card extends PureComponent<CardContainerProps, CardState> {
 		const { isOpen } = this.state;
 
 		return (
-			<MaterialCard ref={this.cardRef} classes={{ root: classes.root }}>
+			<Card ref={this.cardRef} classes={{ root: classes.root }}>
 				<CardActionArea
 					classes={{ root: classes.actionArea }}
 					onClick={this.openDialog}
@@ -191,7 +192,7 @@ class Card extends PureComponent<CardContainerProps, CardState> {
 						</div>
 					</div>
 				</Dialog>
-			</MaterialCard>
+			</Card>
 		);
 	}
 }
@@ -237,4 +238,4 @@ export default withStyles((theme) => ({
 		marginLeft: "auto",
 		textTransform: "none",
 	},
-}))(Card);
+}))(Task);
