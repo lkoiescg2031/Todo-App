@@ -6,7 +6,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 import AppLayoutContext from "../../layout/Applayout/Context";
 
-import KanBanBoard from "./KanBanBoard";
+import AddColumnButton from "./ColumnCreateButton";
 import Column from "../../container/Column";
 import BoardContext from "./BoardContext";
 
@@ -25,6 +25,8 @@ interface BoardProps {
 	data?: BoardItem;
 	columns: ColumnItem[];
 	classes: {
+		boardWrapper: string;
+		board: string;
 		skeleton: string;
 	};
 }
@@ -78,30 +80,49 @@ class Board extends PureComponent<BoardContainerProps> {
 	render() {
 		const { classes, isFetch, columns } = this.props;
 
+		const appendText =
+			Array.isArray(columns) && columns.length === 0
+				? "Add list"
+				: "Add another list";
+
 		return (
 			<BoardContext.Provider value={{ createColumn: this.handleAddColumn }}>
-				{isFetch && (
-					<div className={classes.skeleton}>
-						<Skeleton animation="wave" variant="rect" height={280} />
-						<Skeleton animation="wave" variant="rect" height={200} />
-						<Skeleton animation="wave" variant="rect" height={380} />
-						<Skeleton animation="wave" variant="rect" height={280} />
-						<Skeleton animation="wave" variant="rect" height={36} />
+				<div className={classes.boardWrapper}>
+					<div className={classes.board}>
+						{isFetch ? (
+							<div className={classes.skeleton}>
+								<Skeleton animation="wave" variant="rect" height={280} />
+								<Skeleton animation="wave" variant="rect" height={200} />
+								<Skeleton animation="wave" variant="rect" height={380} />
+								<Skeleton animation="wave" variant="rect" height={280} />
+								<Skeleton animation="wave" variant="rect" height={36} />
+							</div>
+						) : (
+							<>
+								{columns.map((column, key) => (
+									<Column key={`columnId-${key}`} itemId={column.id} />
+								))}
+								<AddColumnButton text={appendText} />
+							</>
+						)}
 					</div>
-				)}
-				{isFetch || (
-					<KanBanBoard>
-						{columns.map((column, key) => (
-							<Column key={`columnId-${key}`} itemId={column.id} />
-						))}
-					</KanBanBoard>
-				)}
+				</div>
 			</BoardContext.Provider>
 		);
 	}
 }
 
 export default withStyles((theme) => ({
+	boardWrapper: {
+		width: "100%",
+		height: "100%",
+		overflow: "auto",
+	},
+	board: {
+		width: "max-content",
+		display: "flex",
+		padding: `${theme.spacing(2)}px ${theme.spacing(1)}px`,
+	},
 	skeleton: {
 		display: "flex",
 		padding: theme.spacing(2),

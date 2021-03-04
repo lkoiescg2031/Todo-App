@@ -1,22 +1,22 @@
 import React from "react";
 import { render } from "@testing-library/react";
 
-import KanBanBoard from "./KanBanBoard";
-import KanBanColumn from "./KanBanColumn";
+import Board from "./Board";
+import Column from "../Column/Column";
 
 describe("<KanBanBoard />", () => {
 	it("snapshot test", () => {
 		const utils = render(
-			<KanBanBoard>
-				<KanBanColumn name="Done" />
-			</KanBanBoard>
+			<Board>
+				<Column name="Done" />
+			</Board>
 		);
 		expect(utils.container).toMatchSnapshot();
 	});
 
 	it("no child append Button name test", () => {
 		const appendButtonText = "Add list";
-		const utils = render(<KanBanBoard></KanBanBoard>);
+		const utils = render(<Board></Board>);
 
 		utils.getByText(appendButtonText);
 	});
@@ -26,11 +26,11 @@ describe("<KanBanBoard />", () => {
 		const appendButtonText = "Add another list";
 
 		const utils = render(
-			<KanBanBoard>
+			<Board>
 				{columnNames.map((name, idx) => (
-					<KanBanColumn key={`Column-${idx}`} name={name} />
+					<Column key={`Column-${idx}`} name={name} />
 				))}
-			</KanBanBoard>
+			</Board>
 		);
 
 		utils.getByText(appendButtonText);
@@ -40,11 +40,11 @@ describe("<KanBanBoard />", () => {
 		const columnNames = ["TODO", "In progress", "Done"];
 
 		const utils = render(
-			<KanBanBoard>
+			<Board>
 				{columnNames.map((name, idx) => (
-					<KanBanColumn key={`Column-${idx}`} name={name} />
+					<Column key={`Column-${idx}`} name={name} />
 				))}
-			</KanBanBoard>
+			</Board>
 		);
 
 		// 자식들이 모두 렌더 되었는 지 확인
