@@ -37,7 +37,6 @@ interface ColumnCreateButtonState {
 	isExpanded: boolean;
 }
 
-//FIXME enter 버튼 눌렀을 때 컬럼이 추가 되지 않음
 //FTXME board 에 칼럼이 추가될 떄 칼럼 전체가 다시 렌더링 되는 현상
 class CreateColumnButton extends PureComponent<
 	ColumnCreateButtonProps,
@@ -58,6 +57,7 @@ class CreateColumnButton extends PureComponent<
 		this.expand = this.expand.bind(this);
 		this.shrink = this.shrink.bind(this);
 		this.checkToShrink = this.checkToShrink.bind(this);
+		this.onEnterPressed = this.onEnterPressed.bind(this);
 		this.handleAddItem = this.handleAddItem.bind(this);
 	}
 
@@ -88,6 +88,7 @@ class CreateColumnButton extends PureComponent<
 					target.focus();
 				}
 				window.addEventListener("click", this.checkToShrink);
+				window.addEventListener("keydown", this.onEnterPressed);
 			}
 		);
 	}
@@ -97,6 +98,7 @@ class CreateColumnButton extends PureComponent<
 			(prevState) => ({ ...prevState, isExpanded: false }),
 			() => {
 				window.removeEventListener("click", this.checkToShrink);
+				window.removeEventListener("keydown", this.onEnterPressed);
 			}
 		);
 	}
@@ -110,6 +112,12 @@ class CreateColumnButton extends PureComponent<
 
 		if (isDragged) {
 			this.setState((prevState) => ({ ...prevState, isDragged: false }));
+		}
+	}
+
+	onEnterPressed(e: globalThis.KeyboardEvent) {
+		if (e.key === "Enter") {
+			this.handleAddItem();
 		}
 	}
 
