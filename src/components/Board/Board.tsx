@@ -32,7 +32,7 @@ interface BoardProps {
 }
 
 interface BoardContainerProps extends BoardProps {
-	isFetch: boolean;
+	isLoading: boolean;
 	requestBoardItem: (id: number, params?: {}, meta?: {}) => void;
 	requestColumnItems: (params?: {}, meta?: {}) => void;
 	requestCreateColumn: (params?: {}, meta?: {}) => void;
@@ -57,12 +57,12 @@ class Board extends PureComponent<BoardContainerProps> {
 		const {
 			itemId,
 			data,
-			isFetch,
+			isLoading,
 			requestBoardItem,
 			requestColumnItems,
 		} = this.props;
 
-		if (typeof data === "undefined" && isFetch === false) {
+		if (typeof data === "undefined" && isLoading === false) {
 			requestBoardItem(itemId);
 		}
 
@@ -78,7 +78,7 @@ class Board extends PureComponent<BoardContainerProps> {
 	}
 
 	render() {
-		const { classes, isFetch, columns } = this.props;
+		const { classes, isLoading, columns } = this.props;
 
 		const appendText =
 			Array.isArray(columns) && columns.length === 0
@@ -89,7 +89,7 @@ class Board extends PureComponent<BoardContainerProps> {
 			<BoardContext.Provider value={{ createColumn: this.handleAddColumn }}>
 				<div className={classes.boardWrapper}>
 					<div className={classes.board}>
-						{isFetch ? (
+						{isLoading ? (
 							<div className={classes.skeleton}>
 								<Skeleton animation="wave" variant="rect" height={280} />
 								<Skeleton animation="wave" variant="rect" height={200} />

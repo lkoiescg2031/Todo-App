@@ -21,7 +21,7 @@ const mapStateToProps = (state: {}, props: { itemId: number }) => {
 	const { itemId } = props;
 	return {
 		data: entitySelector(state, itemId),
-		isFetch:
+		isLoading:
 			fetchLoadingStateSelector(state) || fetchListLoadingStateSelector(state),
 		columns: columnsSelector(state).filter(
 			(entity: { boardId: number }) => entity.boardId === itemId
